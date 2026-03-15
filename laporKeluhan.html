@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lapor Keluhan Wisata</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scriptKeluhan.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Suara Wisata</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto mb-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="laporKeluhan.html">Lapor Keluhan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Tentang kami</a>
+          </li>
+        </ul>
+        <div class="d-flex gap-3">
+          <form action="login.html" method="get">
+            <button type="submit" class="btn btn-dark rounded-pill">Login</button>
+          </form>
+          <form action="register.html" method="get">
+            <button type="submit" class="btn btn-outline-success rounded-pill">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Form Section -->
+  <section class="py-5 mt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0">Form Laporan Keluhan Wisata</h4>
+            </div>
+            <div class="card-body">
+              <form>
+                <!-- Nama Pelapor -->
+                <div class="mb-3">
+                  <label for="namaPelapor" class="form-label">Nama Pelapor</label>
+                    <input type="text" class="form-control" id="idNama" placeholder="Masukkan nama Anda" required>
+                </div>
+                <!-- Alamat Pelapor -->
+                <div class="mb-3">
+                  <label for="alamatPelapor" class="form-label">Alamat Pelapor</label>
+                  <input type="text" class="form-control" id="idAlamatPelapor" placeholder="Masukkan alamat Anda" required>
+                </div>
+                <!-- Lokasi Wisata -->
+                <div class="mb-3">
+                  <label for="lokasiWisata" class="form-label">Lokasi Wisata</label>
+                  <input type="text" class="form-control" id="idLokasi" placeholder="Masukkan lokasi wisata" required>
+                </div>
+                <!-- Isi Laporan -->
+                <div class="mb-3">
+                  <label for="isiLaporan" class="form-label">Isi Laporan</label>
+                  <textarea class="form-control" id="idIsi" rows="5" placeholder="Tuliskan keluhan Anda di sini..." required ></textarea>
+                </div>
+                <!-- Tombol Submit -->
+                <div class="d-grid">
+                  <button type="button" class="btn btn-primary" id="btnKirim">Kirim Laporan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
