@@ -23,14 +23,14 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="index.html" class="h1"><b>Register</b>Page</a>
+                <a href="index.php" class="h1"><b>Register</b>Page</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new account</p>
 
-                <form id="registerForm"method="post">
+                <form id="registerForm"method="POST" action="proses_registrasi.php">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full name" id="idNama">
+                        <input type="text" class="form-control" placeholder="Full name" id="idNama" name="nama">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" id="idUsername">
+                        <input type="text" class="form-control" placeholder="Username" id="idUsername" name="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" id="idPassword">
+                        <input type="password" class="form-control" placeholder="Password" id="idPassword" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password" id="idRetypePass">
+                        <input type="password" class="form-control" placeholder="Retype password" id="idRetypePass" name="retype_password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -64,13 +64,13 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="button" class="btn btn-primary btn-block" id="btnRegister">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block" name="register" id="btnRegister">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <a href="login.html" class="text-center">I already have account</a>
+                <a href="login.php" class="text-center">I already have account</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->

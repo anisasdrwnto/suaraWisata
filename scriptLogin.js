@@ -16,7 +16,7 @@ $(document).ready(function () {
             alert("Username dan password perlu diisi");
         }else if(username === saveusername && password === savepassword) {
             alert("Login berhasil");
-            window.location.href = "index.html";
+            window.location.href = "index.php";
         } else {
             alert("Username atau password salah");
         }
