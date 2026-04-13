@@ -1,32 +1,32 @@
 <?php 
 include 'koneksi.php';
 
-if(isset($_POST['register'])){
+
     $nama     = $_POST['nama'];
     $username = $_POST['username'];
-    //Enkripsi password untuk keamanan
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
+    $role     = 'USR';
 
-    //Cek apakah username sudah ada
-    $cekUsername = mysqli_query($connection, "SELECT username FROM users WHERE username = '$username'");
+    $hash     = password_hash($password, PASSWORD_DEFAULT);
 
-    if(mysqli_num_rows($cekUsername) > 0){
-        echo "Username sudah digunakan! <a href='register.php'>Kembali</a>";
+    $statement = $connection->prepare("SELECT id_users FROM users WHERE username = ?");
+    $statement->bind_param("s", $username);
+    $statement->execute();
+    $statement->store_result();
+
+    if($statement->num_rows > 0){
+        echo 'username_exist';
+        exit;
     }else{
-        //Insert data ke database
-        $query = "INSERT INTO users (nama, username, password) VALUES ('$nama', '$username', '$password')";
-        if(mysqli_query($connection, $query)){
-            ?>
-            <script>
-                alert('Registrasi berhasil!');
-                window.location.href = 'login.php';
-            </script>
-            <?php
-            exit;
+        $statement = $connection->prepare("INSERT INTO users (nama, username, password, ROLE) VALUES (?, ?, ?, ?)");
+        $statement->bind_param("ssss", $nama, $username, $hash, $role);
+        if($statement->execute()){
+            echo 'success';
         }else{
-            echo "Error: " . mysqli_error($connection);
+            echo 'failed'. $statement->error;
         }
     }
-}
+   
+
 
 ?>

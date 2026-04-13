@@ -111,33 +111,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function () {
-    $("#btnMulai").click(function(){
-      //Gulir ke bagian berikutnya
-      $("#tentangKami").get(0).scrollIntoView({
-        behavior: 'smooth' //Gulir secara halus
-      })
-    })
-    var semuaLaporan = localStorage.getItem("laporanWisata");
-    if (semuaLaporan) {
-        semuaLaporan = JSON.parse(semuaLaporan);
-
-        var html = "";
-        semuaLaporan.forEach(function (laporan, index) {
-            html += `
-                <div class="mb-3 p-3 border rounded">
-                    <h5 class="fw-bold">Laporan ${index + 1}</h5>
-                    <p><strong>Nama:</strong> ${laporan.nama}</p>
-                    <p><strong>Alamat:</strong> ${laporan.alamat}</p>
-                    <p><strong>Lokasi Wisata:</strong> ${laporan.lokasi}</p>
-                    <p><strong>Isi Laporan:</strong> ${laporan.isi}</p>
-                </div>
-            `;
-        });
-
-        $("#laporanOutput").html(html);
-    }
-});
 </script>
 
 

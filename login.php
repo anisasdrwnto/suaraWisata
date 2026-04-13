@@ -14,7 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!--- Script Register --->
-    <script src="scriptLogin.js"></script>
+    <script src="js/scriptLogin.js"></script>
+    <!--Swal-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
    <body class="login-page">
@@ -25,8 +27,7 @@
       </div>
       <div class="card-body">
         <p class="login-box-msg">Login to start your session</p>
-
-        <form action="proses_login.php" method="POST">
+        <form>
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Username" id="idUsername" name="username">
             <div class="input-group-append">
@@ -35,7 +36,6 @@
               </div>
             </div>
           </div>
-
           <div class="input-group mb-3">
             <input type="password" class="form-control" placeholder="Password" id="idPassword" name="password">
             <div class="input-group-append">
@@ -44,14 +44,12 @@
               </div>
             </div>
           </div>
-
           <div class="row">
             <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block" id="btnLogin" name="login">Login</button>
             </div>
           </div>
         </form>
-
         <p class="mb-0 mt-3 text-center">
           <a href="register.php" class="text-center">Register a new membership</a>
         </p>

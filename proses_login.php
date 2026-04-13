@@ -1,29 +1,30 @@
 <?php
+
 session_start();
-include 'koneksi.php';
 
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+include "koneksi.php";
 
-    // SQL Injection Prevention (Prepared Statement)
-    $stmt = $connection->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-    if ($user && password_verify($password, $user['password'])) {
-        // Simpan data ke session SETELAH $user ada
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['nama']     = $user['nama'];   // simpan nama di sini
-        header("Location: dashboard.php");
 
-    } else {
-        echo "<script>
-                alert('Username atau password salah');
-                window.location.href = 'login.php';
-              </script>";
+// $result = mysqli_query($connection, "SELECT * FROM users WHERE username = '$username'");
+$statement = $connection->prepare("SELECT * FROM users WHERE username = ?");
+$statement->bind_param("s", $username);
+$statement->execute();
+$result = $statement->get_result();
+if($row = $result->fetch_assoc()){
+    if(password_verify($password, $row['password'])){
+        $_SESSION['id_users'] = $row['id_users'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['ROLE']     = $row['ROLE'];
+       
+        echo $row['ROLE'];
+    }else{
+        echo 'Username atau Password Salah';
     }
+}else{
+    echo 'Koneksi terputus,silahkan dicoba lagi';
 }
+
 ?>
