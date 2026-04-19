@@ -34,6 +34,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                         <span id="errorNama" class="error invalid-feedback"></span>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" id="idUsername" name="username">
@@ -42,6 +43,7 @@
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        <span id="errorUsername" class="error invalid-feedback"></span>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Password" id="idPassword" name="password">
@@ -50,6 +52,7 @@
                                 <span class="fas fa-key"></span>
                             </div>
                         </div>
+                        <span id="errorPassword" class="error invalid-feedback"></span>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Retype password" id="idRetypePass" name="retype_password">
@@ -58,11 +61,12 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                         <span id="errorRetypePass" class="error invalid-feedback"></span>
                     </div>
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block" name="register" id="btnRegister">Register</button>
+                            <button type="button" class="btn btn-primary btn-block" name="register" id="btnRegister">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>

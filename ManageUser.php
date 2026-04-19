@@ -89,26 +89,29 @@ $base_url = "/suaraWisata/";
         <div class="form-group">
           <label>Nama Pengguna</label>
           <input type="text" id="nama" class="form-control">
-          <small class="text-danger d-none" id="err_nama">Nama pengguna wajib diisi</small>
+          <span id="errorNama" class="error invalid-feedback"></span>
         </div>
 
         <div class="form-group">
           <label>Username</label>
           <input type="text" id="username" class="form-control">
-          <small class="text-danger d-none" id="err_alamat">Username wajib diisi</small>
+          <span id="errorUsername" class="error invalid-feedback"></span>
         </div>
 
          <div class="form-group">
           <label>Password</label>
           <input type="password" id="password" class="form-control" placeholder="Masukkan password">
+          <span id="errorPassword" class="error invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label>Role</label>
           <select id="role" class="form-control">
+            <option value="">-- Pilih Role --</option>
             <option value="USR">USER</option>
             <option value="ADMIN">ADMIN</option>
             <option value="ADMIN_MASTER">ADMIN MASTER</option>
           </select>
+          <span id="errorRole" class="error invalid-feedback"></span>
         </div>
       </div> 
 

@@ -54,7 +54,9 @@ $base_url = "/suaraWisata/";
                       <th class="text-center">No</th>
                       <th>ID Laporan</th>
                       <th>Nama Pelapor</th>
-                      <th>Alamat Pelapor</th>
+                      <th>Nomer Telepon</th>
+                      <th>Email</th>
+                      <th>Lokasi (Provinsi, Kab/Kota)</th>
                       <th>Lokasi Wisata</th>
                       <th>Isi Laporan</th>
                       <th>Action</th>
@@ -90,31 +92,61 @@ $base_url = "/suaraWisata/";
         <div class="form-group">
           <label>Nama Pelapor</label>
           <input type="text" id="nama_pelapor" class="form-control">
-          <small class="text-danger d-none" id="err_nama">Nama pelapor wajib diisi</small>
+          <span id="errorNama" class="error invalid-feedback"></span>
         </div>
 
         <div class="form-group">
-          <label>Alamat Pelapor</label>
-          <input type="text" id="alamat_pelapor" class="form-control">
-          <small class="text-danger d-none" id="err_alamat">Alamat pelapor wajib diisi</small>
+          <label>No Telepon</label>
+          <input type="text" id="nomer_telp" class="form-control">
+          <span id="errorNoTelepon" class="error invalid-feedback"></span>
         </div>
+        
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" id="email" class="form-control">
+          <span id="errorEmail" class="error invalid-feedback"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Provinsi</label>
+          <select id="provinsi" class="form-control">
+            <option value="">-- Pilih Provinsi --</option>
+          </select>
+          <span id="errorProvinsi" class="error invalid-feedback"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Kabupaten / Kota</label>
+          <select id="kabkota" class="form-control" disabled>
+            <option value="">-- Pilih Kabupaten/Kota --</option>
+          </select>
+          <span id="errorKabkota" class="error invalid-feedback"></span>
+        </div>
+
+        <div class="form-group" id="lokasiReadonly" style="display:none;">
+            <label>Lokasi (Provinsi, Kab/Kota)</label>
+            <input type="text" class="form-control" id="lokasiReadonlyText" readonly>
+        </div>
+
+        <!-- Hidden field — yang dikirim ke PHP & disimpan ke DB -->
+        <input type="hidden" id="lokasi_wisata" name="lokasi_wisata">
 
         <div class="form-group">
           <label>Lokasi Wisata</label>
-          <input type="text" id="lokasi_wisata" class="form-control">
-          <small class="text-danger d-none" id="err_lokasi">Lokasi wisata wajib diisi</small>
+          <input type="text" id="info_lokasi" class="form-control">
+          <span id="errorInfoLokasi" class="error invalid-feedback"></span>
         </div>
 
         <div class="form-group">
           <label>Isi Laporan</label>
           <textarea id="isi_laporan" class="form-control" rows="4"></textarea>
-          <small class="text-danger d-none" id="err_isi">Isi laporan wajib diisi</small>
+          <span id="err_isi" class="error invalid-feedback"></span>
         </div>
       </div>
 
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="btnSimpanLaporan">Save</button>
+        <button type="button" class="btn btn-primary" id="btnSimpanLaporan">Save</button>
       </div>
 
     </div>
@@ -134,7 +166,7 @@ $base_url = "/suaraWisata/";
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/scriptKeluhan.js"></script>
+<script src="js/scriptLaporan.js"></script>
 <script src="js/logout.js"></script>
 
 <script>

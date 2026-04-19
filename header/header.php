@@ -1,5 +1,4 @@
 <?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
-
 <!-- NAVBAR -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <ul class="navbar-nav">

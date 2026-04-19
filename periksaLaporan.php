@@ -54,6 +54,8 @@ $base_url = "/suaraWisata/";
                       <th class="text-center">No</th>
                       <th>ID Laporan</th>
                       <th>Nama Pelapor</th>
+                      <th>Nomer Telepon</th>
+                      <th>Email</th>
                       <th>Lokasi Wisata</th>
                       <th>Isi Laporan</th>
                       <th>Status</th>
@@ -104,12 +106,16 @@ $base_url = "/suaraWisata/";
                   <label>Nama Pelapor</label>
                   <input type="text" id="detail_nama_pelapor" class="form-control" readonly>
                 </div>
-                <div class="form-group">
-                  <label>Alamat Pelapor</label>
-                  <input type="text" id="detail_alamat_pelapor" class="form-control" readonly>
+                 <div class="form-group">
+                  <label>Nomer Telepon</label>
+                  <input type="text" id="detail_nomer_telp" class="form-control" readonly>
                 </div>
-              </div>
-              <div class="col-md-6">
+                 <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" id="detail_email" class="form-control" readonly>
+                </div>
+
+              
                 <div class="form-group">
                   <label>Lokasi Wisata</label>
                   <input type="text" id="detail_lokasi_wisata" class="form-control" readonly>

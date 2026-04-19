@@ -3,6 +3,7 @@ var  role = {}
 
 $(document).ready(function(){
 
+    const BASE_URL = "/suaraWisata/";
     $('#btnAddRole').click(function(){
         $('#id_role').val('');
         $('#code_role').val('');
@@ -14,6 +15,40 @@ $(document).ready(function(){
     $('#btnSimpanRole').click(function(){
         var id_role = $('#id_role').val();
         var action    = id_role ? 'update' : 'create';
+        var code_role = $('#code_role').val();
+        var nama_role = $('#nama_role').val();
+        let isValid = 1;
+
+        if(action === 'create'){
+            if(code_role === ''){
+                $("#code_role").addClass("is-invalid");
+                $('#errorCodeRole').html('Kode Role wajib diisi');
+                isValid = 0;
+            }
+            
+            if(nama_role === ''){
+                $("#nama_role").addClass("is-invalid");
+                $('#errorNamaRole').html('Nama Role wajib diisi');
+                isValid = 0;
+            }
+
+            $('#code_role').on('input', function(){
+                if($(this).val() !== ''){
+                    $(this).removeClass('is-invalid');
+                    $('#errorCodeRole').html('');
+                }
+            })
+
+            $('#nama_role').on('input', function(){
+                if($(this).val() !== ''){
+                    $(this).removeClass('is-invalid');
+                    $('#errorNamaRole').html('');
+                }
+            })
+
+        }
+
+        if(isValid == 0) return;
 
         var json = {
             action         : action,
@@ -27,7 +62,7 @@ $(document).ready(function(){
 
         console.log(json);
 
-        var url = 'proses_role.php';
+        var url = BASE_URL + 'proses/proses_role.php';
         $.post(url, json, function(response){
             console.log(response);
             if(response.status == 'success'){
@@ -59,7 +94,7 @@ $(document).ready(function(){
     $(document).on('click', '.btnEdit', function(){
         var id = $(this).data('id');
 
-        $.get('proses_role.php', { action: 'getById', id: id }, function(response){
+        $.get(BASE_URL + 'proses/proses_role.php', { action: 'getById', id: id }, function(response){
             console.log(response);
             var d = response.data;
             $('#id_role').val(d.id_role);
@@ -90,7 +125,7 @@ $(document).ready(function(){
                     id     : id
                 };
 
-                var url = 'proses_role.php';
+                var url = BASE_URL + 'proses/proses_role.php';
                 $.post(url, json, function(response){
                     console.log(response);
                     if(response.status == 'success'){
@@ -122,7 +157,8 @@ $(document).ready(function(){
 });
 
 function loadData(){
-    $.get('proses_role.php', { action: 'read' }, function(response){
+    const BASE_URL = '/suaraWisata/';
+    $.get(BASE_URL + 'proses/proses_role.php', { action: 'read' }, function(response){
         console.log(response);
         var tbody = $('#tbodyRole');
         tbody.empty();

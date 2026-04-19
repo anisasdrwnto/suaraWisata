@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    const BASE_URL = "/suaraWisata/";
     $('#messagelogout').click(function(e){
         e.preventDefault(); //cegah langsung ke index.php
 
@@ -12,7 +13,7 @@ $(document).ready(function(){
             cancelButtonText  : 'Batal'
         }).then(function(result) {
             if (result.isConfirmed) {
-                window.location.href = "/suaraWisata/proses_logout.php";
+                window.location.href = BASE_URL +  "proses/proses_logout.php";
             }
         })
     });

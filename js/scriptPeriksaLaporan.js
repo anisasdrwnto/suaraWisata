@@ -1,19 +1,19 @@
 console.log("ini periksa laporan js");
 var periksaLaporan = {}
+const BASE_URL = '/suaraWisata/';
  
 $(document).ready(function(){
- 
-    // Buka modal respons saat btnRespons diklik
     $(document).on('click', '.btnRespons', function(){
         var id = $(this).data('id');
  
-        $.get('proses_periksaLaporan.php', { action: 'getById', id: id }, function(response){
+        $.get(BASE_URL + 'proses/proses_periksaLaporan.php', { action: 'getById', id: id }, function(response){
             console.log(response);
             var d = response.data;
             $('#id_laporan').val(d.id_laporan);
             $('#detail_id_laporan').val(d.id_laporan);
             $('#detail_nama_pelapor').val(d.nama_pelapor);
-            $('#detail_alamat_pelapor').val(d.alamat_pelapor);
+            $('#detail_nomer_telp').val(d.nomer_telp);
+            $('#detail_email').val(d.email);
             $('#detail_lokasi_wisata').val(d.lokasi_wisata);
             $('#detail_isi_laporan').val(d.isi_laporan);
             $('#status').val(d.status ? d.status : 'Menunggu');
@@ -42,7 +42,7 @@ $(document).ready(function(){
             return;
         }
  
-        $.post('proses_periksaLaporan.php', json, function(response){
+        $.post(BASE_URL + 'proses/proses_periksaLaporan.php', json, function(response){
             console.log(response);
             if(response.status == 'success'){
                 $('#modalRespons').modal('hide');
@@ -69,7 +69,7 @@ $(document).ready(function(){
 });
  
 function loadData(){
-    $.get('proses_periksaLaporan.php', { action: 'read' }, function(response){
+    $.get(BASE_URL + 'proses/proses_periksaLaporan.php', { action: 'read' }, function(response){
         console.log(response);
         var tbody = $('#tbodyPeriksa');
         tbody.empty();
@@ -101,6 +101,8 @@ function loadData(){
                     '<td class="text-center">' + (i+1) + '</td>' +
                     '<td>' + row.id_laporan    + '</td>' +
                     '<td>' + row.nama_pelapor  + '</td>' +
+                    '<td>' + row.nomer_telp    + '</td>' + 
+                    '<td>' + row.email         + '</td>' + 
                     '<td>' + row.lokasi_wisata + '</td>' +
                     '<td>' + row.isi_laporan   + '</td>' +
                     '<td>' + statusBadge       + '</td>' +

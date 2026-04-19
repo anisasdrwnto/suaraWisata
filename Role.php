@@ -82,31 +82,30 @@ $base_url = "/suaraWisata/";
 <div class="modal fade" id="modalAddRole" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">
+
+      <div class="modal-body">       
         <h4>Form Role</h4>
         <input type="hidden" id="id_role" name="id_role">
         <div class="form-group">
             <label>Code Role</label>
             <input type="text" id="code_role" class="form-control">
-            <small class="text-danger d-none" id="err_nama">Code role wajib diisi</small>
+            <span id="errorCodeRole" class="error invalid-feedback"></span>
         </div>
         <div class="form-group">
           <label>Nama Role</label>
           <input type="text" id="nama_role" class="form-control">
-          <small class="text-danger d-none" id="err_nama">Nama role wajib diisi</small>
+          <span id="errorNamaRole" class="error invalid-feedback"></span>
         </div>
+      </div>  
 
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="btnSimpanRole">Save</button>
+        <button type="button" class="btn btn-primary" id="btnSimpanRole">Save</button>
       </div>
 
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
 <!-- Scripts -->
 <script src="plugins/jquery/jquery.min.js"></script>

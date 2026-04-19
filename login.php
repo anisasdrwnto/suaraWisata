@@ -13,6 +13,9 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        const BASE_URL = "/suaraWisata/";
+    </script>
     <!--- Script Register --->
     <script src="js/scriptLogin.js"></script>
     <!--Swal-->
@@ -30,11 +33,13 @@
         <form>
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Username" id="idUsername" name="username">
+            
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
+            <span id="errorUsername" class="error invalid-feedback"></span>
           </div>
           <div class="input-group mb-3">
             <input type="password" class="form-control" placeholder="Password" id="idPassword" name="password">
@@ -43,10 +48,11 @@
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            <span id="errorPassword" class="error invalid-feedback"></span>
           </div>
           <div class="row">
             <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-block" id="btnLogin" name="login">Login</button>
+              <button type="button" class="btn btn-primary btn-block" id="btnLogin" name="login">Login</button>
             </div>
           </div>
         </form>

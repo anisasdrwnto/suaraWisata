@@ -10,6 +10,11 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+if($_SESSION['ROLE'] !== 'USR'){
+    header("Location: index.php");
+    exit;
+}
+
 $base_url = "/suaraWisata/";
 ?>
 <!DOCTYPE html>
@@ -21,51 +26,9 @@ $base_url = "/suaraWisata/";
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <style>
-    .timeline-card {
-      border-left: 4px solid #dee2e6;
-      padding-left: 20px;
-      margin-bottom: 30px;
-      position: relative;
-    }
-    .timeline-card::before {
-      content: '';
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #dee2e6;
-      position: absolute;
-      left: -9px;
-      top: 6px;
-    }
-    .timeline-card.status-menunggu { border-left-color: #6c757d; }
-    .timeline-card.status-menunggu::before { background: #6c757d; }
-
-    .timeline-card.status-diproses { border-left-color: #ffc107; }
-    .timeline-card.status-diproses::before { background: #ffc107; }
-
-    .timeline-card.status-selesai { border-left-color: #28a745; }
-    .timeline-card.status-selesai::before { background: #28a745; }
-
-    .respons-box {
-      background: #f8f9fa;
-      border-left: 3px solid #007bff;
-      padding: 10px 15px;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: #adb5bd;
-    }
-    .empty-state i {
-      font-size: 60px;
-      margin-bottom: 15px;
-    }
-  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -81,11 +44,12 @@ $base_url = "/suaraWisata/";
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8 offset-md-2">
-            <div id="timelineContainer">
-              <div class="empty-state">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Memuat data...</p>
+          <div class="col-md-12">
+            <div class="timeline" id="timelineContainer">
+              <!-- loading spinner -->
+              <div id="loadingSpinner" class="text-center py-5">
+                <i class="fas fa-spinner fa-spin fa-2x text-muted"></i>
+                <p class="text-muted mt-2">Memuat data...</p>
               </div>
             </div>
           </div>
@@ -107,90 +71,147 @@ $base_url = "/suaraWisata/";
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const BASE_URL = "/suaraWisata/";
+</script>
 <script src="js/logout.js"></script>
 
 <script>
-  function loadTimeline() {
-    $.get('proses_statusLaporan.php', { action: 'read' }, function(response) {
-      var container = $('#timelineContainer');
-      container.empty();
+   function loadTimeline() {
+    $.get(BASE_URL + 'proses/proses_statusLaporan.php', { action: 'read' }, function(response) {
+        var container = $('#timelineContainer');
+        $('#loadingSpinner').remove();
 
-      if (!response.data || response.data.length == 0) {
-        container.html(
-          '<div class="empty-state">' +
-            '<i class="fas fa-inbox"></i>' +
-            '<p class="h5">Belum ada laporan</p>' +
-            '<p>Anda belum pernah mengirimkan laporan wisata.</p>' +
-          '</div>'
-        );
-        return;
-      }
-
-      $.each(response.data, function(i, row) {
-        var status     = row.status ? row.status : 'Menunggu';
-        var statusLow  = status.toLowerCase();
-
-        // Icon per status
-        var iconClass  = 'fas fa-clock text-secondary';
-        if (status == 'Diproses') iconClass = 'fas fa-spinner text-warning';
-        if (status == 'Selesai')  iconClass = 'fas fa-check-circle text-success';
-
-        // Badge per status
-        var badgeClass = 'badge-secondary';
-        if (status == 'Diproses') badgeClass = 'badge-warning';
-        if (status == 'Selesai')  badgeClass = 'badge-success';
-
-        // Respons box
-        var responsHtml = '';
-        if (row.respons_admin) {
-          var tgl = row.tgl_respons ? '<small class="text-muted ml-2"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '';
-          responsHtml =
-            '<div class="respons-box mt-2">' +
-              '<p class="mb-1"><strong><i class="fas fa-reply mr-1 text-primary"></i> Respons Admin</strong>' + tgl + '</p>' +
-              '<p class="mb-0">' + row.respons_admin + '</p>' +
-            '</div>';
-        } else {
-          responsHtml =
-            '<div class="respons-box mt-2">' +
-              '<p class="mb-0 text-muted"><i class="fas fa-hourglass-half mr-1"></i> Menunggu respons dari admin...</p>' +
-            '</div>';
+        if (!response.data || response.data.length == 0) {
+            container.html(
+                '<div class="text-center py-5">' +
+                    '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
+                    '<p class="h5 text-muted">Belum ada laporan</p>' +
+                    '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
+                '</div>'
+            );
+            return;
         }
 
-        container.append(
-          '<div class="timeline-card status-' + statusLow + '">' +
-            '<div class="d-flex justify-content-between align-items-start">' +
-              '<div>' +
-                '<h6 class="mb-1"><i class="' + iconClass + ' mr-2"></i>' + row.id_laporan + '</h6>' +
-                '<p class="mb-1 text-muted"><i class="fas fa-map-marker-alt mr-1"></i>' + row.lokasi_wisata + '</p>' +
-              '</div>' +
-              '<span class="badge ' + badgeClass + ' px-3 py-2">' + status + '</span>' +
-            '</div>' +
-            '<p class="mb-1"><strong>Isi Laporan:</strong> ' + row.isi_laporan + '</p>' +
-            responsHtml +
-          '</div>'
-        );
-      });
+        $.each(response.data, function(i, row) {
+            var status = row.status ? row.status : 'Menunggu';
+            var tahap  = 1;
+            if (status == 'Diproses') tahap = 2;
+            if (status == 'Selesai')  tahap = 3;
+
+            // Time label per laporan
+            container.append(
+                '<div class="time-label">' +
+                    '<span class="bg-primary">' + row.id_laporan + '</span>' +
+                '</div>'
+            );
+
+            // Tahap 1 - Menunggu (selalu ada)
+            container.append(
+                '<div>' +
+                    '<i class="fas fa-clock bg-secondary"></i>' +
+                    '<div class="timeline-item">' +
+                        '<h3 class="timeline-header">' +
+                            '<span class="badge badge-secondary">Menunggu</span> Laporan diterima' +
+                        '</h3>' +
+                        '<div class="timeline-body">' +
+                            '<i class="fas fa-map-marker-alt mr-1 text-muted"></i>' + row.lokasi_wisata + '<br>' +
+                            '<strong>Isi Laporan:</strong> ' + row.isi_laporan +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+
+            // Tahap 2 - Diproses
+            if (tahap >= 2) {
+                container.append(
+                    '<div>' +
+                        '<i class="fas fa-spinner bg-warning"></i>' +
+                        '<div class="timeline-item">' +
+                            '<h3 class="timeline-header">' +
+                                '<span class="badge badge-warning">Diproses</span> Laporan sedang diproses admin' +
+                            '</h3>' +
+                            (row.respons_admin && tahap == 2 ?
+                                '<div class="timeline-body">' +
+                                    '<div class="callout callout-warning">' +
+                                        '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
+                                        (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
+                                        '<p class="mb-0">' + row.respons_admin + '</p>' +
+                                    '</div>' +
+                                '</div>' : ''
+                            ) +
+                        '</div>' +
+                    '</div>'
+                );
+            } else {
+                container.append(
+                    '<div>' +
+                        '<i class="fas fa-spinner bg-gray"></i>' +
+                        '<div class="timeline-item">' +
+                            '<h3 class="timeline-header text-muted">' +
+                                '<span class="badge badge-secondary">Diproses</span> Menunggu diproses admin...' +
+                            '</h3>' +
+                        '</div>' +
+                    '</div>'
+                );
+            }
+
+            // Tahap 3 - Selesai
+            if (tahap >= 3) {
+                container.append(
+                    '<div>' +
+                        '<i class="fas fa-check bg-success"></i>' +
+                        '<div class="timeline-item">' +
+                            '<h3 class="timeline-header">' +
+                                '<span class="badge badge-success">Selesai</span> Laporan selesai ditangani' +
+                            '</h3>' +
+                            (row.respons_admin ?
+                                '<div class="timeline-body">' +
+                                    '<div class="callout callout-success">' +
+                                        '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
+                                        (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
+                                        '<p class="mb-0">' + row.respons_admin + '</p>' +
+                                    '</div>' +
+                                '</div>' : ''
+                            ) +
+                        '</div>' +
+                    '</div>'
+                );
+            } else {
+                container.append(
+                    '<div>' +
+                        '<i class="fas fa-check bg-gray"></i>' +
+                        '<div class="timeline-item">' +
+                            '<h3 class="timeline-header text-muted">' +
+                                '<span class="badge badge-secondary">Selesai</span> Belum selesai...' +
+                            '</h3>' +
+                        '</div>' +
+                    '</div>'
+                );
+            }
+        });
+
+        container.append('<div><i class="fas fa-clock bg-gray"></i></div>');
 
     }, 'json');
-  }
+}
 
-  $(document).ready(function() {
-    loadTimeline();
-  });
-
-  history.pushState(null, null, window.location.href);
-  window.addEventListener('pageshow', function(e) {
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => { if (!data.loggedIn) window.location.replace('index.php'); })
-      .catch(function() { window.location.replace('index.php'); });
-  });
-  window.addEventListener('popstate', function() {
+    $(document).ready(function() {
+        loadTimeline();
+    });
     history.pushState(null, null, window.location.href);
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => { if (!data.loggedIn) window.location.replace('index.php'); });
-  });
+    window.addEventListener('pageshow', function(e) {
+      fetch('check_session.php', { cache: 'no-store' })
+        .then(res => res.json())
+        .then(data => { if (!data.loggedIn) window.location.replace('index.php'); })
+        .catch(function() { window.location.replace('index.php'); });
+    });
+    window.addEventListener('popstate', function() {
+      history.pushState(null, null, window.location.href);
+      fetch('check_session.php', { cache: 'no-store' })
+        .then(res => res.json())
+        .then(data => { if (!data.loggedIn) window.location.replace('index.php'); });
+    });
 </script>
 
 </body>
