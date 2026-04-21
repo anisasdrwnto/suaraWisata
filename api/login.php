@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        const BASE_URL = "/suaraWisata/";
+        const BASE_URL = "/suaraWisata/api/";
     </script>
     <!--- Script Register --->
     <script src="js/scriptLogin.js"></script>
