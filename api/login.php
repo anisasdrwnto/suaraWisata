@@ -17,7 +17,7 @@
         const BASE_URL = "/suaraWisata/api/";
     </script>
     <!--- Script Register --->
-    <script src="js/scriptLogin.js"></script>
+    <script src="api/js/scriptLogin.js"></script>
     <!--Swal-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
