@@ -14,10 +14,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        const BASE_URL = "/suaraWisata/api/";
+        const BASE_URL = "/api/";
     </script>
     <!--- Script Register --->
-    <script src="api/js/scriptLogin.js"></script>
+    <script src="js/scriptLogin.js"></script>
     <!--Swal-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>

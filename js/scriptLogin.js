@@ -33,7 +33,7 @@ $(document).ready(function(){
         if(isValid == 0) return;
 
         $.ajax({
-            url : BASE_URL + 'api/proses/proses_login.php',
+            url : BASE_URL + 'proses/proses_login.php',
             type: 'POST',
 
             data: {
@@ -49,7 +49,7 @@ $(document).ready(function(){
                             text: 'Login berhasil!',
                             timer: 2000
                         }).then(() => {
-                            window.location = 'api/dashboard/dashboard_master.php';  
+                            window.location = '/api/dashboard/dashboard_master.php';  
                         }); 
                     }else if(response === "ADMIN"){
                         Swal.fire({
@@ -57,7 +57,7 @@ $(document).ready(function(){
                             text: 'Login berhasil!',
                             timer: 2000
                         }).then(() => {
-                            window.location = 'api/dashboard/dashboard_admin.php';
+                            window.location = '/api/dashboard/dashboard_admin.php';
                         }); 
                     }else if(response === "USR"){
                         Swal.fire({
@@ -65,7 +65,7 @@ $(document).ready(function(){
                             text: 'Login berhasil!',
                             timer: 2000
                         }).then(() => {
-                           window.location = 'api/dashboard/dashboard_user.php';
+                           window.location = '/api/dashboard/dashboard_user.php';
                         }); 
                     }else{
                         Swal.fire({ icon: 'error', text: 'Login gagal' });
