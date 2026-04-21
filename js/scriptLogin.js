@@ -43,6 +43,7 @@ $(document).ready(function(){
 
             success:function(response){
                     response = response.trim();
+                    console.log("RESPONSE:", response); // ← tambahkan ini
                     if(response === "ADMIN_MASTER"){
                             Swal.fire({
                             icon: 'success',
