@@ -1,4 +1,10 @@
-<?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
+<?php
+// Ambil dari $_GET karena session tidak jalan di Vercel
+$username = $_GET['user'] ?? 'Guest';
+$role     = $_GET['role'] ?? '';
+$base_url = '/api/';
+?>
+
 <!-- NAVBAR -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <ul class="navbar-nav">
@@ -29,7 +35,7 @@
         <img src="<?= $base_url ?>images/profile-pic.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a class="d-block"><?= isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?></a>
+        <a class="d-block"><?= htmlspecialchars($username); ?></a>
       </div>
     </div>
     <nav class="mt-2">
@@ -37,58 +43,62 @@
         <li class="nav-item menu-open">
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>dashboard/dashboard_user.php" class="nav-link">
+              <a href="<?= $base_url ?>dashboard/dashboard_user.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
                 <p>Welcome page</p>
               </a>
             </li>
           </ul>
 
-          <?php if ($_SESSION['ROLE'] !== 'ADMIN_MASTER' && $_SESSION['ROLE'] !== 'ADMIN'):?>
+          <?php if ($role !== 'ADMIN_MASTER' && $role !== 'ADMIN'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>laporKeluhan.php" class="nav-link">
+              <a href="<?= $base_url ?>laporKeluhan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
                 <p>Laporan Keluhan Wisata</p>
               </a>
             </li>
           </ul>
-           <?php endif; ?>
+          <?php endif; ?>
 
-            <?php if ($_SESSION['ROLE'] !== 'USR' && $_SESSION['ROLE'] !== 'ADMIN'):?>
+          <?php if ($role !== 'USR' && $role !== 'ADMIN'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>Role.php" class="nav-link">
+              <a href="<?= $base_url ?>Role.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
                 <p>Role</p>
               </a>
             </li>
           </ul>
-           <?php endif; ?>
-           <?php if ($_SESSION['ROLE'] === 'ADMIN_MASTER'): ?>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= $base_url ?>ManageUser.php" class="nav-link">
-                  <p>Manage User</p>
-                </a>
-              </li>
-            </ul>
-            <?php endif; ?>
-            <?php if ($_SESSION['ROLE'] === 'ADMIN'): ?>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= $base_url ?>PeriksaLaporan.php" class="nav-link">
-                  <p>Periksa Laporan</p>
-                </a>
-                </li>
-            </ul>
-            <?php endif; ?>
-              <?php if ($_SESSION['ROLE'] === 'USR'):?>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?= $base_url ?>StatusLaporan.php" class="nav-link">
-                    <p>Status Laporan</p>
-                  </a>
-                  </li>
-              </ul>
-             <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'ADMIN_MASTER'): ?>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= $base_url ?>ManageUser.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+                <p>Manage User</p>
+              </a>
+            </li>
+          </ul>
+          <?php endif; ?>
+
+          <?php if ($role === 'ADMIN'): ?>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= $base_url ?>periksaLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+                <p>Periksa Laporan</p>
+              </a>
+            </li>
+          </ul>
+          <?php endif; ?>
+
+          <?php if ($role === 'USR'): ?>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= $base_url ?>statusLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+                <p>Status Laporan</p>
+              </a>
+            </li>
+          </ul>
+          <?php endif; ?>
+
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" class="nav-link" id="messagelogout">
@@ -96,6 +106,7 @@
               </a>
             </li>
           </ul>
+
         </li>
       </ul>
     </nav>
