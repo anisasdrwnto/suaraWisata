@@ -72,9 +72,9 @@ $(document).ready(function(){
                         Swal.fire({ icon: 'error', text: 'Login gagal' });
                     }
             },
-            error:function(e){
-                alert("Error : " + e)
-            }
-        })
+            error: function(e){
+            alert("Error : " + e.status + " - " + e.responseText);
+        }
+                })
     })
 })
