@@ -1,4 +1,7 @@
 <?php
+ini_set('session.cookie_samesite', 'None');
+ini_set('session.cookie_secure', '1');
+ini_set('session.cookie_httponly', '1');
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/api/koneksi.php';
 
@@ -16,14 +19,7 @@ try {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role']     = $row['role'];
 
-            // Sesuaikan dengan nilai role di database (huruf kapital)
-            $roleMap = [
-                'ADMIN_MASTER' => 'ADMIN_MASTER',
-                'ADMIN'        => 'ADMIN',
-                'USR'          => 'USR',
-            ];
-
-            echo $roleMap[$row['role']] ?? 'UNKNOWN';
+            echo $row['role'];
         } else {
             echo 'WRONG_PASSWORD';
         }
