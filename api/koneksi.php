@@ -1,18 +1,30 @@
 <?php
+// Data dari TiDB Cloud
+$host = 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
+$port = 4000;
+$user = '';
+$pass = '';
+$db   = 'suara_wisata';
 
-$servername = "localhost";
-$database   = "suarawisata";
-$username   = "root";
-$password   = "";
+// Inisialisasi mysqli
+$koneksi = mysqli_init();
 
+// Menambahkan pengaturan SSL (Wajib untuk TiDB Serverless)
+mysqli_ssl_set($koneksi, NULL, NULL, NULL, NULL, NULL);
 
-//Create connection
-$connection = mysqli_connect($servername, $username, $password, $database);
+// Melakukan koneksi
+$real_connect = mysqli_real_connect(
+    $koneksi, 
+    $host, 
+    $user, 
+    $pass, 
+    $db, 
+    $port, 
+    NULL, 
+    MYSQLI_CLIENT_SSL
+);
 
-//Cek koneksi
-if(!$connection){
-    echo("Koneksi gagal: " . mysqli_connect_error());
+if (!$real_connect) {
+    die("Koneksi ke TiDB Cloud gagal: " . mysqli_connect_error());
 }
-
-
 ?>
