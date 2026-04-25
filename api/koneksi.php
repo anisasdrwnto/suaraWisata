@@ -1,19 +1,17 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $host     = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
-$username = '28bs2jCJxPBCHff.root';  // Ganti dengan prefix asli kamu
-$password = 'xGUugfYqG11ci1bk';    // Ganti dengan password asli
+$username = '28bs2jCJxPBCHff.root';
+$password = 'xGUugfYqG11ci1bk';
 $dbname   = 'suara_wisata';
 $port     = 4000;
 
-// 1. Init koneksi
 $connection = mysqli_init();
-
-// 2. Set SSL dulu SEBELUM real_connect
 mysqli_ssl_set($connection, NULL, NULL, NULL, NULL, NULL);
 
-// 3. Baru connect
-$real_connect = mysqli_real_connect(
+$result = mysqli_real_connect(
     $connection,
     $host,
     $username,
@@ -24,8 +22,10 @@ $real_connect = mysqli_real_connect(
     MYSQLI_CLIENT_SSL
 );
 
-// 4. Cek koneksi
-if (!$real_connect) {
-    die("Koneksi ke TiDB Cloud gagal: " . mysqli_connect_error());
+if (!$result) {
+    echo "GAGAL: " . mysqli_connect_errno() . " - " . mysqli_connect_error();
+} else {
+    echo "KONEKSI BERHASIL! ✅";
+    mysqli_close($connection);
 }
 ?>
