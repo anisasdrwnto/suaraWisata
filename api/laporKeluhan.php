@@ -23,8 +23,7 @@ $base_url = "/";
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <?php include __DIR__ . '/../header/header.php'; ?>
-
+ <?php include __DIR__ . '/header/header.php'; ?>
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
@@ -66,7 +65,7 @@ $base_url = "/";
     </section>
   </div>
 
-  <?php include __DIR__ . '/../footer/footer.php'; ?>
+<?php include __DIR__ . '/footer/footer.php'; ?>
   <aside class="control-sidebar control-sidebar-dark"></aside>
 
 </div>
