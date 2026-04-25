@@ -30,92 +30,73 @@ if(empty($username)){
 
   <?php include __DIR__ . '/../header/header.php'; ?>
 
-  <!-- CONTENT WRAPPER -->
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
-        <h1>Hello, <?= htmlspecialchars($_SESSION['username']); ?></h1>
+
+        <!-- Ganti $_SESSION ke $username dari $_GET -->
+        <h1>Hello, <?= htmlspecialchars($username); ?></h1>
+
         <div class="row">
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/api/images/Gambar 1.jpg" class="card-img-top gallery-img" alt="Gambar 1">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 1</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 1</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/api/images/Gambar 2.jpg" class="card-img-top gallery-img" alt="Gambar 2">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 2</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 2</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/api/images/Gambar 3.jpg" class="card-img-top gallery-img" alt="Gambar 3">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 3</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 3</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/api/images/Gambar 4.jpg" class="card-img-top gallery-img" alt="Gambar 4">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 4</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 4</p></div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   </div>
-  <!-- /.content-wrapper -->
 
   <?php include __DIR__ . '/../footer/footer.php'; ?>
-
   <aside class="control-sidebar control-sidebar-dark"></aside>
 
 </div>
-<!-- /.wrapper -->
 
 <script src="/api/plugins/jquery/jquery.min.js"></script>
 <script src="/api/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+<script>$.widget.bridge('uibutton', $.ui.button)</script>
 <script src="/api/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/api/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/api/dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/api/js/logout.js"></script>
 <script>
-  history.pushState(null, null, window.location.href);
+  // HAPUS cek check_session.php karena session tidak jalan di Vercel
+  // Cukup cek dari URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const user = urlParams.get('user');
+  
+  if(!user){
+    window.location.replace('/index.html');
+  }
 
-  window.addEventListener('pageshow', function(e) {
-    fetch('/api/check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.loggedIn) {
-          window.location.replace('/index.html');
-        }
-      })
-      .catch(function() {
-        window.location.replace('/index.html');
-      });
-  });
+  history.pushState(null, null, window.location.href);
 
   window.addEventListener('popstate', function() {
     history.pushState(null, null, window.location.href);
-    fetch('/api/check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.loggedIn) {
-          window.location.replace('/index.html');
-        }
-      });
+    const u = new URLSearchParams(window.location.search).get('user');
+    if(!u) window.location.replace('/index.html');
   });
 </script>
 
