@@ -44,34 +44,32 @@ $(document).ready(function(){
             success:function(response){
                     response = response.trim();
                     console.log("RESPONSE:", response); // ← tambahkan ini
-                    if(response === "ADMIN_MASTER"){
-                            Swal.fire({
-                            icon: 'success',
-                            text: 'Login berhasil!',
-                            timer: 2000
-                        }).then(() => {
-                            window.location = 'dashboard/dashboard_master.php';  
-                        }); 
-                    }else if(response === "ADMIN"){
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'Login berhasil!',
-                            timer: 2000
-                        }).then(() => {
-                            window.location = 'dashboard/dashboard_admin.php';
-                        }); 
-                    }else if(response === "USR"){
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'Login berhasil!',
-                            timer: 2000
-                        }).then(() => {
-                           window.location = 'dashboard/dashboard_user.php';
-                        }); 
-                    }else{
-                        Swal.fire({ icon: 'error', text: 'Login gagal' });
-                    }
-            },
+                                if(response === "ADMIN_MASTER"){
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Login berhasil!',
+                        timer: 2000
+                    }).then(() => {
+                        window.location = '/api/dashboard/dashboard_master.php';
+                    }); 
+                } else if(response === "ADMIN"){
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Login berhasil!',
+                        timer: 2000
+                    }).then(() => {
+                        window.location = '/api/dashboard/dashboard_admin.php';
+                    }); 
+                } else if(response === "USR"){
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Login berhasil!',
+                        timer: 2000
+                    }).then(() => {
+                        window.location = '/api/dashboard/dashboard_user.php';
+                    }); 
+                }
+                            },
             error: function(e){
             alert("Error : " + e.status + " - " + e.responseText);
         }
