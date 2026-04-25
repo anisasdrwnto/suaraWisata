@@ -1,12 +1,9 @@
 <?php
-session_start();
+$username = $_GET['user'] ?? '';
+$role     = $_GET['role'] ?? '';
 
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Pragma: no-cache");
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+if (empty($username)) {
+    header("Location: /index.html");
     exit;
 }
 
@@ -22,19 +19,12 @@ $base_url = "/";
   <link rel="stylesheet" href="<?= $base_url ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= $base_url ?>dist/css/adminlte.min.css">
   <link rel="stylesheet" href="<?= $base_url ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <?php include "header/header.php"; ?>
+  <?php include __DIR__ . '/../header/header.php'; ?>
 
-  <!-- CONTENT WRAPPER -->
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
@@ -75,42 +65,34 @@ $base_url = "/";
       </div>
     </section>
   </div>
-  <!-- /.content-wrapper -->
 
-  <!-- FOOTER -->
-  <?php include "footer/footer.php"; ?>
-
-  <!-- CONTROL SIDEBAR -->
+  <?php include __DIR__ . '/../footer/footer.php'; ?>
   <aside class="control-sidebar control-sidebar-dark"></aside>
 
 </div>
-<!-- /.wrapper -->
 
+<!-- Modal -->
 <div class="modal fade" id="modalAddLaporan" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
         <h4>Form Laporan Keluhan Wisata</h4>
-          <input type="hidden" id="id_laporan" name="id_laporan">
-
+        <input type="hidden" id="id_laporan" name="id_laporan">
         <div class="form-group">
           <label>Nama Pelapor</label>
           <input type="text" id="nama_pelapor" class="form-control">
           <span id="errorNama" class="error invalid-feedback"></span>
         </div>
-
         <div class="form-group">
           <label>No Telepon</label>
           <input type="text" id="nomer_telp" class="form-control">
           <span id="errorNoTelepon" class="error invalid-feedback"></span>
         </div>
-        
         <div class="form-group">
           <label>Email</label>
           <input type="text" id="email" class="form-control">
           <span id="errorEmail" class="error invalid-feedback"></span>
         </div>
-
         <div class="form-group">
           <label>Provinsi</label>
           <select id="provinsi" class="form-control">
@@ -118,7 +100,6 @@ $base_url = "/";
           </select>
           <span id="errorProvinsi" class="error invalid-feedback"></span>
         </div>
-
         <div class="form-group">
           <label>Kabupaten / Kota</label>
           <select id="kabkota" class="form-control" disabled>
@@ -126,85 +107,51 @@ $base_url = "/";
           </select>
           <span id="errorKabkota" class="error invalid-feedback"></span>
         </div>
-
         <div class="form-group" id="lokasiReadonly" style="display:none;">
-            <label>Lokasi (Provinsi, Kab/Kota)</label>
-            <input type="text" class="form-control" id="lokasiReadonlyText" readonly>
+          <label>Lokasi (Provinsi, Kab/Kota)</label>
+          <input type="text" class="form-control" id="lokasiReadonlyText" readonly>
         </div>
-
-        <!-- Hidden field — yang dikirim ke PHP & disimpan ke DB -->
         <input type="hidden" id="lokasi_wisata" name="lokasi_wisata">
-
         <div class="form-group">
           <label>Lokasi Wisata</label>
           <input type="text" id="info_lokasi" class="form-control">
           <span id="errorInfoLokasi" class="error invalid-feedback"></span>
         </div>
-
         <div class="form-group">
           <label>Isi Laporan</label>
           <textarea id="isi_laporan" class="form-control" rows="4"></textarea>
           <span id="err_isi" class="error invalid-feedback"></span>
         </div>
       </div>
-
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="btnSimpanLaporan">Save</button>
       </div>
-
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- Scripts -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
 <script src="<?= $base_url ?>plugins/jquery/jquery.min.js"></script>
 <script src="<?= $base_url ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+<script>$.widget.bridge('uibutton', $.ui.button)</script>
 <script src="<?= $base_url ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= $base_url ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="<?= $base_url ?>dist/js/adminlte.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?= $base_url ?>js/scriptLaporan.js"></script>
 <script src="<?= $base_url ?>js/logout.js"></script>
-<!-- <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="dist/js/adminlte.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/scriptLaporan.js"></script>
-<script src="js/logout.js"></script> -->
 
 <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const user = urlParams.get('user');
+  if (!user) window.location.replace('/index.html');
+
   history.pushState(null, null, window.location.href);
-
-  window.addEventListener('pageshow', function(e) {
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.loggedIn) {
-          window.location.replace('index.php');
-        }
-      })
-      .catch(function() {
-        window.location.replace('index.php');
-      });
-  });
-
   window.addEventListener('popstate', function() {
     history.pushState(null, null, window.location.href);
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.loggedIn) {
-          window.location.replace('index.php');
-        }
-      });
+    if (!new URLSearchParams(window.location.search).get('user')) {
+      window.location.replace('/index.html');
+    }
   });
 </script>
 
