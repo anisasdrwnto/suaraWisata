@@ -18,7 +18,7 @@ include '../koneksi.php';
         echo 'username_exist';
         exit;
     }else{
-        $statement = $connection->prepare("INSERT INTO users (nama, username, password, ROLE) VALUES (?, ?, ?, ?)");
+        $statement = $connection->prepare("INSERT INTO users (nama, username, password, role) VALUES (?, ?, ?, ?)");
         $statement->bind_param("ssss", $nama, $username, $hash, $role);
         if($statement->execute()){
             echo 'success';
