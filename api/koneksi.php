@@ -1,4 +1,5 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/api/koneksi.php';
 // Data dari TiDB Cloud
 $host = 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
 $port = 4000;
