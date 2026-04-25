@@ -1,32 +1,32 @@
-<?php 
-include '../koneksi.php';
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/api/koneksi.php';
 
+$nama     = $_POST['nama']     ?? '';
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
+$role     = 'USR';
+$hash     = password_hash($password, PASSWORD_DEFAULT);
 
-    $nama     = $_POST['nama'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $role     = 'USR';
-
-    $hash     = password_hash($password, PASSWORD_DEFAULT);
-
-    $statement = $connection->prepare("SELECT id_users FROM users WHERE username = ?");
-    $statement->bind_param("s", $username);
-    $statement->execute();
-    $statement->store_result();
-
-    if($statement->num_rows > 0){
+try {
+    // Cek username sudah ada
+    $stmt = $connection->prepare("SELECT id_users FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    
+    if ($stmt->rowCount() > 0) {
         echo 'username_exist';
         exit;
-    }else{
-        $statement = $connection->prepare("INSERT INTO users (nama, username, password, role) VALUES (?, ?, ?, ?)");
-        $statement->bind_param("ssss", $nama, $username, $hash, $role);
-        if($statement->execute()){
-            echo 'success';
-        }else{
-            echo 'failed'. $statement->error;
-        }
     }
-   
 
+    // Insert user baru
+    $stmt = $connection->prepare("INSERT INTO users (nama, username, password, role) VALUES (?, ?, ?, ?)");
+    if ($stmt->execute([$nama, $username, $hash, $role])) {
+        echo 'success';
+    } else {
+        echo 'failed';
+    }
 
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo "DB Error: " . $e->getMessage();
+}
 ?>
