@@ -41,38 +41,32 @@ $(document).ready(function(){
                 password : password
             },
 
-            success:function(response){
-                    response = response.trim();
-                    console.log("RESPONSE:", response); // ← tambahkan ini
-                                if(response === "ADMIN_MASTER"){
-                    Swal.fire({
-                        icon: 'success',
-                        text: 'Login berhasil!',
-                        timer: 2000
-                    }).then(() => {
-                        window.location = '/api/dashboard/dashboard_master.php';
-                    }); 
+          success: function(response){
+                response = response.trim();
+                console.log("RESPONSE:", response);
+
+                if(response === "ADMIN_MASTER"){
+                    Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
+                    .then(() => { window.location = '/api/dashboard/dashboard_master.php'; });
+
                 } else if(response === "ADMIN"){
-                    Swal.fire({
-                        icon: 'success',
-                        text: 'Login berhasil!',
-                        timer: 2000
-                    }).then(() => {
-                        window.location = '/api/dashboard/dashboard_admin.php';
-                    }); 
+                    Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
+                    .then(() => { window.location = '/api/dashboard/dashboard_admin.php'; });
+
                 } else if(response === "USR"){
-                    Swal.fire({
-                        icon: 'success',
-                        text: 'Login berhasil!',
-                        timer: 2000
-                    }).then(() => {
-                        window.location = '/api/dashboard/dashboard_user.php';
-                    }); 
+                    Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
+                    .then(() => { window.location = '/api/dashboard/dashboard_user.php'; });
+
+                } else if(response === "WRONG_PASSWORD" || response === "USER_NOT_FOUND"){
+                    Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
+
+                } else {
+                    Swal.fire({ icon: 'error', text: 'Terjadi kesalahan: ' + response });
                 }
-                            },
-            error: function(e){
-            alert("Error : " + e.status + " - " + e.responseText);
-        }
-                })
+            },
+            error: function(){
+                Swal.fire({ icon: 'error', text: 'Terjadi kesalahan pada server' });
+            }
+        })
     })
 })
