@@ -8,6 +8,9 @@
         { "source": "/api/dashboard/:file.php", "destination": "/api/dashboard/:file.php" },
         { "source": "/api/proses/:file.php", "destination": "/api/proses/:file.php" },
         { "source": "/api/:file.php", "destination": "/api/:file.php" },
+        { "source": "/plugins/(.*)", "destination" : "/plugins/$1"},
+        { "source": "/dist/(.*)", "destination": "/dist/$1"},
+        { "source": "/js/(.*)", "destination": "/js/$1"},
         { "source": "/(.*)", "destination": "/$1" }
     ]
 }
