@@ -15,15 +15,22 @@ try {
             $_SESSION['id_users'] = $row['id_users'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['role']     = $row['role'];
-            echo $row['role'];
+
+            $roleMap = [
+                'admin_master' => 'ADMIN_MASTER',
+                'admin'        => 'ADMIN',
+                'user'         => 'USR',
+            ];
+
+            echo $roleMap[$row['role']] ?? 'UNKNOWN';
         } else {
-            echo 'Username atau Password Salah';
+            echo 'WRONG_PASSWORD';
         }
     } else {
-        echo 'User tidak ditemukan';
+        echo 'USER_NOT_FOUND';
     }
 } catch (PDOException $e) {
     http_response_code(500);
-    echo "DB Error: " . $e->getMessage();
+    echo "DB_ERROR: " . $e->getMessage();
 }
 ?>
