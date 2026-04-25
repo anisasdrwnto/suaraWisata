@@ -1,4 +1,7 @@
 <?php
+ini_set('session.cookie_samesite', 'None');
+ini_set('session.cookie_secure', '1');
+ini_set('session.cookie_httponly', '1');
 session_start();
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
