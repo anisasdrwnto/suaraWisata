@@ -7,14 +7,14 @@ $pass = '';
 $db   = 'suara_wisata';
 
 // Inisialisasi mysqli
-$koneksi = mysqli_init();
+$connection = mysqli_init();
 
 // Menambahkan pengaturan SSL (Wajib untuk TiDB Serverless)
-mysqli_ssl_set($koneksi, NULL, NULL, NULL, NULL, NULL);
+mysqli_ssl_set($connection, NULL, NULL, NULL, NULL, NULL);
 
 // Melakukan koneksi
 $real_connect = mysqli_real_connect(
-    $koneksi, 
+    $connection, 
     $host, 
     $user, 
     $pass, 
