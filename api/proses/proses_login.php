@@ -16,10 +16,11 @@ try {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role']     = $row['role'];
 
+            // Sesuaikan dengan nilai role di database (huruf kapital)
             $roleMap = [
-                'admin_master' => 'ADMIN_MASTER',
-                'admin'        => 'ADMIN',
-                'user'         => 'USR',
+                'ADMIN_MASTER' => 'ADMIN_MASTER',
+                'ADMIN'        => 'ADMIN',
+                'USR'          => 'USR',
             ];
 
             echo $roleMap[$row['role']] ?? 'UNKNOWN';
