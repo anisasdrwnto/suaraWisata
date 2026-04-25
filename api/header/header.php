@@ -2,7 +2,7 @@
 // Ambil dari $_GET karena session tidak jalan di Vercel
 $username = $_GET['user'] ?? 'Guest';
 $role     = $_GET['role'] ?? '';
-$base_url = '/';
+$base_url = '/api/';
 ?>
 
 <!-- NAVBAR -->
