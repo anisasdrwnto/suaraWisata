@@ -52,11 +52,11 @@ $(document).ready(function(){
                 } else if(response === "ADMIN"){
                     Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
                     .then(() => { window.location = '/api/dashboard/dashboard_admin.php'; });
-
                 } else if(response === "USR"){
-                    Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
-                    .then(() => { window.location = '/api/dashboard/dashboard_user.php'; });
-
+                Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
+                .then(() => { 
+                    window.location = '/api/dashboard/dashboard_user.php?user=' + encodeURIComponent($('#idUsername').val());
+                });
                 } else if(response === "WRONG_PASSWORD" || response === "USER_NOT_FOUND"){
                     Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
 
