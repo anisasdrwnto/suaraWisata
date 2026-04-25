@@ -1,8 +1,8 @@
 <?php
 
-$host     = 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
-$username = '2uskH12345.root';  // Ganti dengan prefix asli kamu
-$password = 'your_password';    // Ganti dengan password asli
+$host     = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
+$username = '28bs2jCJxPBCHff.root';  // Ganti dengan prefix asli kamu
+$password = '53GdFosQJVjJ30mV';    // Ganti dengan password asli
 $dbname   = 'suara_wisata';
 $port     = 4000;
 

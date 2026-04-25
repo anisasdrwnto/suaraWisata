@@ -17,9 +17,9 @@ if($row = $result->fetch_assoc()){
     if(password_verify($password, $row['password'])){
         $_SESSION['id_users'] = $row['id_users'];
         $_SESSION['username'] = $row['username'];
-        $_SESSION['ROLE']     = $row['ROLE'];
+        $_SESSION['role']     = $row['role'];
        
-        echo $row['ROLE'];
+        echo $row['role'];
     }else{
         echo 'Username atau Password Salah';
     }
