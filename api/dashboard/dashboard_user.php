@@ -12,11 +12,11 @@ if(empty($username)){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard User</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <link rel="stylesheet" href="/api/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="/api/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="/api/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="/api/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <style>
     .gallery-img {
       height: 200px;
@@ -40,25 +40,25 @@ if(empty($username)){
         <div class="row">
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
-              <img src="/api/images/Gambar 1.jpg" class="card-img-top gallery-img" alt="Gambar 1">
+              <img src="/images/Gambar 1.jpg" class="card-img-top gallery-img" alt="Gambar 1">
               <div class="card-body"><p class="card-text">Pariwisata 1</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
-              <img src="/api/images/Gambar 2.jpg" class="card-img-top gallery-img" alt="Gambar 2">
+              <img src="/images/Gambar 2.jpg" class="card-img-top gallery-img" alt="Gambar 2">
               <div class="card-body"><p class="card-text">Pariwisata 2</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
-              <img src="/api/images/Gambar 3.jpg" class="card-img-top gallery-img" alt="Gambar 3">
+              <img src="/images/Gambar 3.jpg" class="card-img-top gallery-img" alt="Gambar 3">
               <div class="card-body"><p class="card-text">Pariwisata 3</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
-              <img src="/api/images/Gambar 4.jpg" class="card-img-top gallery-img" alt="Gambar 4">
+              <img src="/images/Gambar 4.jpg" class="card-img-top gallery-img" alt="Gambar 4">
               <div class="card-body"><p class="card-text">Pariwisata 4</p></div>
             </div>
           </div>
@@ -73,14 +73,14 @@ if(empty($username)){
 
 </div>
 
-<script src="/api/plugins/jquery/jquery.min.js"></script>
-<script src="/api/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>$.widget.bridge('uibutton', $.ui.button)</script>
-<script src="/api/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/api/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="/api/dist/js/adminlte.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/api/js/logout.js"></script>
+<script src="/js/logout.js"></script>
 <script>
   // HAPUS cek check_session.php karena session tidak jalan di Vercel
   // Cukup cek dari URL parameter
