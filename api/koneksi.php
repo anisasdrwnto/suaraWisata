@@ -6,12 +6,12 @@ $dbname = 'suara_wisata';
 $port   = 4000;
 
 try {
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4;ssl-mode=VERIFY_IDENTITY";
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
     $connection = new PDO($dsn, $user, $pass, [
-        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
-        PDO::MYSQL_ATTR_SSL_CA               => '/etc/ssl/certs/ca-certificates.crt',
-        PDO::ATTR_ERRMODE                    => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_TIMEOUT                    => 8,
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+        PDO::MYSQL_ATTR_SSL_CA                => '/etc/ssl/certs/ca-certificates.crt',
+        PDO::ATTR_ERRMODE                     => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_TIMEOUT                     => 8,
     ]);
 } catch (PDOException $e) {
     http_response_code(500);
