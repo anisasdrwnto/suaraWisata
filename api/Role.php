@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-$base_url = "/suaraWisata/";
+$base_url = "/";
 ?>
 
 <!DOCTYPE html>

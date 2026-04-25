@@ -15,7 +15,7 @@ if ($_SESSION['ROLE'] !== 'ADMIN' && $_SESSION['ROLE'] !== 'ADMIN_MASTER') {
     exit;
 }
  
-$base_url = "/suaraWisata/";
+$base_url = "/";
 ?>
 <!DOCTYPE html>
 <html lang="en">
