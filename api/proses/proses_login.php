@@ -1,9 +1,6 @@
 <?php
-ini_set('session.cookie_samesite', 'None');
-ini_set('session.cookie_secure', '1');
-ini_set('session.cookie_httponly', '1');
-session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/api/koneksi.php';
+header('Content-Type: application/json');
 
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
@@ -15,19 +12,20 @@ try {
 
     if ($row) {
         if (password_verify($password, $row['password'])) {
-            $_SESSION['id_users'] = $row['id_users'];
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['role']     = $row['role'];
-
-            echo $row['role'];
+            echo json_encode([
+                'status'   => 'success',
+                'role'     => $row['role'],
+                'username' => $row['username'],
+                'id_users' => $row['id_users']
+            ]);
         } else {
-            echo 'WRONG_PASSWORD';
+            echo json_encode(['status' => 'error', 'message' => 'WRONG_PASSWORD']);
         }
     } else {
-        echo 'USER_NOT_FOUND';
+        echo json_encode(['status' => 'error', 'message' => 'USER_NOT_FOUND']);
     }
 } catch (PDOException $e) {
     http_response_code(500);
-    echo "DB_ERROR: " . $e->getMessage();
+    echo json_encode(['status' => 'error', 'message' => 'DB_ERROR: ' . $e->getMessage()]);
 }
 ?>
