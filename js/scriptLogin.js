@@ -54,7 +54,7 @@ $(document).ready(function(){
                 } else if(response === "USR"){
                 Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
                 .then(() => { 
-                    window.location = '/dashboard/dashboard_user.php?user=' + encodeURIComponent(username) + '&role=USR';
+                    window.location = '/api/dashboard/dashboard_user.php?user=' + encodeURIComponent(username) + '&role=USR';
                 });
                 } else if(response === "WRONG_PASSWORD" || response === "USER_NOT_FOUND"){
                     Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
