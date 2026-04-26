@@ -51,11 +51,11 @@ $(document).ready(function(){
                     Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000, showConfirmButton: false })
                     .then(function(){
                         if(role === 'ADMIN_MASTER'){
-                            window.location = '/dashboard/dashboard_master.php?user=' + uname + '&role=ADMIN_MASTER&id_users=' + idUsers;
+                            window.location = '/api/dashboard/dashboard_master.php?user=' + uname + '&role=ADMIN_MASTER&id_users=' + idUsers;
                         } else if(role === 'ADMIN'){
-                            window.location = '/dashboard/dashboard_admin.php?user=' + uname + '&role=ADMIN&id_users=' + idUsers;
+                            window.location = '/api/dashboard/dashboard_admin.php?user=' + uname + '&role=ADMIN&id_users=' + idUsers;
                         } else if(role === 'USR'){
-                            window.location = '/dashboard/dashboard_user.php?user=' + uname + '&role=USR&id_users=' + idUsers;
+                            window.location = '/api/ashboard/dashboard_user.php?user=' + uname + '&role=USR&id_users=' + idUsers;
                         }
                     });
 
