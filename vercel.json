@@ -16,7 +16,7 @@
         { "source": "/Role.php", "destination": "/api/Role.php" },
 
         { "source": "/proses/(.*)", "destination": "/api/proses/$1"},
-        { "source": "/api.php", "destination": "/api/api.php" }
+        { "source": "/api.php", "destination": "/api/api.php" },
 
         { "source": "/plugins/(.*)", "destination": "/plugins/$1" },
         { "source": "/dist/(.*)", "destination": "/dist/$1" },
