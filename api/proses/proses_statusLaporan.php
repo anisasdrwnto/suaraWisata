@@ -1,19 +1,17 @@
 <?php
-require '../koneksi.php';
+require __DIR__ . '/../koneksi.php';
 header('Content-Type: application/json');
 
-session_start();
+// Ganti session dengan $_GET karena session tidak jalan di Vercel
+$action   = $_POST['action'] ?? $_GET['action'] ?? '';
+$id_users = $_POST['id_users'] ?? $_GET['id_users'] ?? '';
 
-if (!isset($_SESSION['id_users'])) {
-    echo json_encode(['status' => 'error', 'message' => 'Session tidak ditemukan']);
+if (empty($id_users)) {
+    echo json_encode(['status' => 'error', 'message' => 'id_users tidak ditemukan']);
     exit;
 }
 
-$action   = $_POST['action'] ?? $_GET['action'] ?? '';
-$id_users = $_SESSION['id_users'];
-
 if ($action == 'read') {
-
     $id_users_esc = mysqli_real_escape_string($connection, $id_users);
     $result       = mysqli_query($connection, 
         "SELECT id_laporan, nama_pelapor, lokasi_wisata, isi_laporan, 
@@ -24,7 +22,6 @@ if ($action == 'read') {
     );
     $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
     echo json_encode(['status' => 'success', 'data' => $data]);
-
 }
 
 mysqli_close($connection);
