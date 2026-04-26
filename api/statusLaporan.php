@@ -69,8 +69,11 @@ $base_url = "/";
 <script src="js/logout.js"></script>
 
 <script>
+    // Tambah di atas loadTimeline()
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentUser = urlParams.get('user');
    function loadTimeline() {
-    $.get(BASE_URL + 'proses/proses_statusLaporan.php', { action: 'read' }, function(response) {
+    $.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser }, function(response) {
         var container = $('#timelineContainer');
         $('#loadingSpinner').remove();
 
@@ -191,18 +194,17 @@ $base_url = "/";
     $(document).ready(function() {
         loadTimeline();
     });
+        // Ganti check_session dengan URL params (session tidak jalan di Vercel)
+    if (!new URLSearchParams(window.location.search).get('user')) {
+        window.location.replace('/index.html');
+    }
+
     history.pushState(null, null, window.location.href);
-    window.addEventListener('pageshow', function(e) {
-      fetch('check_session.php', { cache: 'no-store' })
-        .then(res => res.json())
-        .then(data => { if (!data.loggedIn) window.location.replace('index.php'); })
-        .catch(function() { window.location.replace('index.php'); });
-    });
     window.addEventListener('popstate', function() {
-      history.pushState(null, null, window.location.href);
-      fetch('check_session.php', { cache: 'no-store' })
-        .then(res => res.json())
-        .then(data => { if (!data.loggedIn) window.location.replace('index.php'); });
+        history.pushState(null, null, window.location.href);
+        if (!new URLSearchParams(window.location.search).get('user')) {
+        window.location.replace('/index.html');
+        }
     });
 </script>
 

@@ -122,7 +122,6 @@ $('#btnSimpanLaporan').click(function(){
             json.id_laporan = idLaporan;
         }
 
-    // ✅ FIX 1: tambah / di depan URL
     var url = '/proses/proses_laporan.php';
     $.post(url, json, function(response){
         if(response.status == 'success'){
