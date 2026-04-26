@@ -19,8 +19,20 @@ if ($action == 'read') {
     $result = mysqli_query($connection, "SELECT * FROM laporan_wisata WHERE id_laporan = '$id' AND id_users = '$id_users'");
     $data   = mysqli_fetch_assoc($result);
     echo json_encode(['status' => 'success', 'data' => $data]);
-
 } else if ($action == 'create') {
+
+    // Generate ID otomatis
+    $result  = mysqli_query($connection, "SELECT id_laporan FROM laporan_wisata ORDER BY id_laporan DESC LIMIT 1");
+    $lastRow = mysqli_fetch_assoc($result);
+    
+    if ($lastRow) {
+        $lastNum = (int) substr($lastRow['id_laporan'], 3); // 'LPR0001' → 1
+        $newNum  = $lastNum + 1;
+    } else {
+        $newNum = 1;
+    }
+    
+    $newId = 'LPR' . str_pad($newNum, 4, '0', STR_PAD_LEFT); // → LPR0001
 
     $nama       = mysqli_real_escape_string($connection, $_POST['nama_pelapor'] ?? '');
     $no_telp    = mysqli_real_escape_string($connection, $_POST['nomer_telp'] ?? '');
@@ -29,16 +41,17 @@ if ($action == 'read') {
     $infoLokasi = mysqli_real_escape_string($connection, $_POST['info_lokasi'] ?? '');
     $isi        = mysqli_real_escape_string($connection, $_POST['isi_laporan'] ?? '');
 
-    $sql = "INSERT INTO laporan_wisata (nama_pelapor, nomer_telp, email, lokasi_wisata, info_lokasi, isi_laporan, id_users)
-            VALUES ('$nama', '$no_telp', '$email', '$lokasi', '$infoLokasi', '$isi', '$id_users')";
+    $sql = "INSERT INTO laporan_wisata 
+            (id_laporan, nama_pelapor, nomer_telp, email, lokasi_wisata, info_lokasi, isi_laporan, id_users)
+            VALUES ('$newId', '$nama', '$no_telp', '$email', '$lokasi', '$infoLokasi', '$isi', '$id_users')";
 
     if (mysqli_query($connection, $sql)) {
         echo json_encode(['status' => 'success', 'message' => 'Laporan berhasil ditambahkan']);
     } else {
         echo json_encode(['status' => 'error', 'message' => mysqli_error($connection)]);
     }
-
-} else if ($action == 'update') {
+}
+else if ($action == 'update') {
 
     $id         = mysqli_real_escape_string($connection, $_POST['id_laporan']);
     $nama       = mysqli_real_escape_string($connection, $_POST['nama_pelapor']);
