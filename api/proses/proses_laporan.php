@@ -1,12 +1,11 @@
 <?php
-require '../koneksi.php';
+require __DIR__ . '/../koneksi.php';
 header('Content-Type: application/json');
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 // Mulai session sekali di atas
-session_start();
-$id_users = $_SESSION['id_users'] ?? '';
+$id_users = $_POST['id_users'] ?? $_GET['id_users'] ?? '';
 
 if ($action == 'read') {
 

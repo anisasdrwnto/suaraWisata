@@ -1,4 +1,6 @@
 console.log("ini laporan js");
+const urlParams = new URLSearchParams(window.location.search);
+const currentUser = urlParams.get('user');
 var laporan = {}
 
 $(document).ready(function(){
@@ -107,6 +109,7 @@ $('#btnSimpanLaporan').click(function(){
 
         var json = {
             action        : action,
+            id_users      : currentUser,
             nama_pelapor  : $('#nama_pelapor').val(),
             nomer_telp    : $('#nomer_telp').val(),   
             email         : $('#email').val(),
@@ -149,7 +152,7 @@ $('#btnSimpanLaporan').click(function(){
     $(document).on('click', '.btnEdit', function(){
     var id = $(this).data('id');
 
-    $.get('proses/proses_laporan.php', { action: 'getById', id: id }, function(response){
+    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser}, function(response){
         var d = response.data;
         $('#id_laporan').val(d.id_laporan);
         $('#nama_pelapor').val(d.nama_pelapor);
@@ -187,10 +190,11 @@ $('#btnSimpanLaporan').click(function(){
             if(result.isConfirmed){
                 var json = {
                     action : 'delete',
-                    id     : id
+                    id     : id,
+                    id_users : currentUser
                 };
 
-                var url = 'proses/proses_laporan.php';
+                var url = '/proses/proses_laporan.php';
                 $.post(url, json, function(response){
                     console.log(response);
                     if(response.status == 'success'){
@@ -279,7 +283,7 @@ $(document).on('change', '#kabkota', function () {
 });
 
 function loadData(){
-    $.get('proses/proses_laporan.php', { action: 'read' }, function(response){
+    $.get('/proses/proses_laporan.php', { action: 'read', id_users: currentUser }, function(response){
         console.log(response);
         var tbody = $('#tbodyLaporan');
         tbody.empty();
@@ -333,7 +337,7 @@ function loadData(){
 $(document).on('click', '.btnView', function(){
     var id = $(this).data('id');
 
-    $.get('proses/proses_laporan.php', { action: 'getById', id: id }, function(response){
+    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser}, function(response){
         var d = response.data;
         $('#id_laporan').val(d.id_laporan);
         $('#nama_pelapor').val(d.nama_pelapor).prop('readonly', true);
