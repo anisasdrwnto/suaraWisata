@@ -1,17 +1,9 @@
 <?php
-session_start();
+$username = $_GET['user'] ?? '';
+$role     = $_GET['role'] ?? '';
 
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Pragma: no-cache");
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
-    exit;
-}
-
-if($_SESSION['ROLE'] !== 'USR'){
-    header("Location: index.php");
+if (empty($username)) {
+    header("Location: /index.html");
     exit;
 }
 
