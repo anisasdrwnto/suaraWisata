@@ -23,11 +23,11 @@ $(document).ready(function(){
         $('#nama_pelapor').val('');
         $('#nomer_telp').val('');
         $('#email').val('');
-        $('#info_lokasi').val();
-        $('#lokasi_wisata').val();
+        $('#info_lokasi').val('');
+        $('#lokasi_wisata').val('');
         $('#isi_laporan').val('');
        
-         // Tampilkan dropdown, sembunyikan readonly
+        // Tampilkan dropdown, sembunyikan readonly
         $('#provinsi').closest('.form-group').show();
         $('#kabkota').closest('.form-group').show();
         $('#lokasiReadonly').hide();
@@ -122,12 +122,13 @@ $('#btnSimpanLaporan').click(function(){
             json.id_laporan = idLaporan;
         }
 
-    var url = 'proses/proses_laporan.php';
+    // ✅ FIX 1: tambah / di depan URL
+    var url = '/proses/proses_laporan.php';
     $.post(url, json, function(response){
         if(response.status == 'success'){
             $('#modalAddLaporan').modal('hide');
             // Reset semua field
-            $('#id_laporan, #nama_pelapor, #nomer_telp,  #email, #lokasi_wisata, #info_lokasi').val('');
+            $('#id_laporan, #nama_pelapor, #nomer_telp, #email, #lokasi_wisata, #info_lokasi').val('');
             $('#isi_laporan').val('');
             $('#provinsi').html('<option value="">-- Pilih Provinsi --</option>');
             $('#kabkota').html('<option value="">-- Pilih Kabupaten/Kota --</option>').prop('disabled', true);
@@ -152,7 +153,7 @@ $('#btnSimpanLaporan').click(function(){
     $(document).on('click', '.btnEdit', function(){
     var id = $(this).data('id');
 
-    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser}, function(response){
+    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser }, function(response){
         var d = response.data;
         $('#id_laporan').val(d.id_laporan);
         $('#nama_pelapor').val(d.nama_pelapor);
@@ -174,6 +175,7 @@ $('#btnSimpanLaporan').click(function(){
         $('#modalAddLaporan').modal('show');
     }, 'json');
 });
+
     $(document).on('click', '.btnHapus', function(){
         var id = $(this).data('id');
 
@@ -189,8 +191,8 @@ $('#btnSimpanLaporan').click(function(){
         }).then(function(result){
             if(result.isConfirmed){
                 var json = {
-                    action : 'delete',
-                    id     : id,
+                    action   : 'delete',
+                    id       : id,
                     id_users : currentUser
                 };
 
@@ -230,7 +232,8 @@ function loadProvinsi() {
   $('#kabkota').html('<option value="">-- Pilih Kabupaten/Kota --</option>').prop('disabled', true);
 
   $.ajax({
-    url: 'api.php?action=provinsi',
+    // ✅ FIX 2: tambah / di depan URL
+    url: '/api.php?action=provinsi',
     method: 'GET',
     success: function (res) {
       let options = '<option value="">-- Pilih Provinsi --</option>';
@@ -259,7 +262,8 @@ $(document).on('change', '#provinsi', function () {
   $('#kabkota').html('<option value="">Memuat kabupaten/kota...</option>').prop('disabled', true);
 
   $.ajax({
-    url: `api.php?action=kabkota&kode=${kode_prov}`,
+    // ✅ FIX 3: tambah / di depan URL
+    url: `/api.php?action=kabkota&kode=${kode_prov}`,
     method: 'GET',
     success: function (res) {
       let options = '<option value="">-- Pilih Kabupaten/Kota --</option>';
@@ -291,7 +295,7 @@ function loadData(){
         if(!response.data || response.data.length == 0){
             tbody.append(
                 '<tr>' +
-                    '<td colspan="7" class="text-center text-muted py-3">' +
+                    '<td colspan="9" class="text-center text-muted py-3">' +
                         '<i class="fas fa-inbox mr-2"></i> Belum ada data laporan' +
                     '</td>' +
                 '</tr>'
@@ -306,7 +310,7 @@ function loadData(){
                                 '<i class="fas fa-eye"></i>' +
                             '</button>';
             } else {
-                 actionBtn = '<div class="d-flex justify-content-center">' +
+                actionBtn = '<div class="d-flex justify-content-center">' +
                     '<button class="btn btn-warning btn-xs mr-1 btnEdit" data-id="' + row.id_laporan + '">' +
                         '<i class="fas fa-edit"></i>' +
                     '</button>' +
@@ -329,7 +333,7 @@ function loadData(){
                     '<td class="text-center">' + actionBtn + '</td>' +
                 '</tr>'
             );
-            });
+        });
 
     }, 'json');
 }
@@ -337,7 +341,7 @@ function loadData(){
 $(document).on('click', '.btnView', function(){
     var id = $(this).data('id');
 
-    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser}, function(response){
+    $.get('/proses/proses_laporan.php', { action: 'getById', id: id, id_users: currentUser }, function(response){
         var d = response.data;
         $('#id_laporan').val(d.id_laporan);
         $('#nama_pelapor').val(d.nama_pelapor).prop('readonly', true);
