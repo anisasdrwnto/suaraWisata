@@ -47,19 +47,17 @@ $(document).ready(function(){
 
                 if(response === "ADMIN_MASTER"){
                     Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
-                    .then(() => { window.location = '/api/dashboard/dashboard_master.php'; });
-
-                } else if(response === "ADMIN"){
+                    window.location = '/api/dashboard/dashboard_master.php?user=' + encodeURIComponent(username) + '&role=ADMIN_MASTER';
+                }else if(response === "ADMIN"){
                     Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
-                    .then(() => { window.location = '/api/dashboard/dashboard_admin.php'; });
+                    .then(() => {  window.location = '/api/dashboard/dashboard_user.php?user=' + encodeURIComponent(username) + '&role=USR';});
                 } else if(response === "USR"){
                 Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000 })
                 .then(() => { 
-                    window.location = '/api/dashboard/dashboard_user.php?user=' + encodeURIComponent($('#idUsername').val());
+                    window.location = '/dashboard/dashboard_user.php?user=' + encodeURIComponent(username) + '&role=USR';
                 });
                 } else if(response === "WRONG_PASSWORD" || response === "USER_NOT_FOUND"){
                     Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
-
                 } else {
                     Swal.fire({ icon: 'error', text: 'Terjadi kesalahan: ' + response });
                 }
