@@ -141,9 +141,8 @@ $base_url = "/";
 <script src="<?= $base_url ?>js/logout.js"></script>
 
 <script>
-  const user = urlParams.get('user');
   if (!new URLSearchParams(window.location.search).get('user')) {
-      window.location.replace('/index.html');
+    window.location.replace('/index.html');
   }
 
   history.pushState(null, null, window.location.href);
