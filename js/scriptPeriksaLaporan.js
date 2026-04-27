@@ -30,7 +30,8 @@ $(document).ready(function(){
             action        : 'respons',
             id_laporan    : $('#id_laporan').val(),
             status        : $('#status').val(),
-            respons_admin : $('#respons_admin').val()
+            respons_admin : $('#respons_admin').val(),
+            id_admin      : currentUser
         };
  
         console.log(json);
