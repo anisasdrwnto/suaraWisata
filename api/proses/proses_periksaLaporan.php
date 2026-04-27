@@ -32,7 +32,7 @@ if ($action == 'read') {
          WHERE id_laporan = ?"
     );
 
-    if ($stmt->execute([$status, $respons_admin, $tgl_respons, $id_laporan, $id_admin])) {
+   if($stmt->execute([$status, $respons_admin, $tgl_respons, $id_admin, $id_laporan])) {
         echo json_encode(['status' => 'success', 'message' => 'Respons berhasil disimpan']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Gagal menyimpan respons']);
