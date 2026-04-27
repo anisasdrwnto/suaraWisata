@@ -14,11 +14,14 @@
         { "source": "/statusLaporan.php", "destination": "/api/statusLaporan.php" },
         { "source": "/ManageUser.php", "destination": "/api/ManageUser.php" },
         { "source": "/Role.php", "destination": "/api/Role.php" },
+        { "source": "/statistikWisatawan.php", "destination": "/api/statistikWisatawan.php" },
+
 
         { "source": "/proses/(.*)", "destination": "/api/proses/$1"},
         { "source": "/api.php", "destination": "/api/api.php" },
         { "source": "/suaraWisata/proses/(.*)", "destination": "/api/proses/$1" },
         { "source": "/dashboard/:file.php", "destination": "/api/dashboard/:file.php" },
+
 
         { "source": "/plugins/(.*)", "destination": "/plugins/$1" },
         { "source": "/dist/(.*)", "destination": "/dist/$1" },
