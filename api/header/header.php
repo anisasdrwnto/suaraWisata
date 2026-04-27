@@ -2,7 +2,7 @@
 // Ambil dari $_GET karena session tidak jalan di Vercel
 $username = $_GET['user'] ?? 'Guest';
 $role     = strtoupper($_GET['role'] ?? '');
-$id_users - $_GET['id_users'] ?? '';
+$id_users = $_GET['id_users'] ?? '';
 $base_url = '/';
 ?>
 
