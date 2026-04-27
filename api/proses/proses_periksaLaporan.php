@@ -17,6 +17,7 @@ if ($action == 'read') {
     echo json_encode(['status' => 'success', 'data' => $data]);
 
 } else if ($action == 'respons') {
+    $id_admin      = $_POST['id_admin'] ?? '';
     $id_laporan    = $_POST['id_laporan']    ?? '';
     $status        = $_POST['status']        ?? '';
     $respons_admin = $_POST['respons_admin'] ?? '';
@@ -26,11 +27,12 @@ if ($action == 'read') {
         "UPDATE laporan_wisata SET
             status        = ?,
             respons_admin = ?,
-            tgl_respons   = ?
+            tgl_respons   = ?,
+            id_admin      = ?
          WHERE id_laporan = ?"
     );
 
-    if ($stmt->execute([$status, $respons_admin, $tgl_respons, $id_laporan])) {
+    if ($stmt->execute([$status, $respons_admin, $tgl_respons, $id_laporan, $id_admin])) {
         echo json_encode(['status' => 'success', 'message' => 'Respons berhasil disimpan']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Gagal menyimpan respons']);
