@@ -91,12 +91,7 @@ function loadData(){
         $.each(response.data, function(i, row){
             var badgeClass = 'badge-secondary';
             if(row.status == 'Diproses') badgeClass = 'badge-warning';
-            if(row.status == 'Selesai'? '<button class="btn btn-secondary btn-xs" disabled>' +
-                '<i class="fas fa-check"></i> Selesai' +
-            '</button>'
-            : '<button class="btn btn-primary btn-xs btnRespons" data-id="' + row.id_laporan + '">' +
-                '<i class="fas fa-reply"></i> Respons' +
-            '</button>');
+            if(row.status == 'Selesai')  badgeClass = 'badge-success';
  
             var statusBadge  = '<span class="badge ' + badgeClass + '">' + (row.status ? row.status : 'Menunggu') + '</span>';
             var responsText  = row.respons_admin ? row.respons_admin : '<span class="text-muted">Belum ada respons</span>';
@@ -115,9 +110,14 @@ function loadData(){
                     '<td>' + responsText       + '</td>' +
                     '<td>' + tglRespons        + '</td>' +
                     '<td class="text-center">' +
-                        '<button class="btn btn-primary btn-xs btnRespons" data-id="' + row.id_laporan + '">' +
-                            '<i class="fas fa-reply"></i> Respons' +
-                        '</button>' +
+                        (row.status == 'Selesai'
+                            ? '<button class="btn btn-secondary btn-xs" disabled>' +
+                                '<i class="fas fa-check"></i> Selesai' +
+                            '</button>'
+                            : '<button class="btn btn-primary btn-xs btnRespons" data-id="' + row.id_laporan + '">' +
+                                '<i class="fas fa-reply"></i> Respons' +
+                            '</button>'
+                        ) +
                     '</td>' +
                 '</tr>'
             );
