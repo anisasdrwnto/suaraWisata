@@ -69,159 +69,156 @@ $base_url = "/";
 <script src="js/logout.js"></script>
 
 <script>
-    // Test langsung apakah endpoint bisa diakses
-$.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser })
-    .done(function(res) { console.log('SUCCESS:', res); })
-    .fail(function(xhr) { console.log('FAIL:', xhr.status, xhr.responseText); });
-    
-    // Tambah di atas loadTimeline()
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentUser = urlParams.get('id_users');
-   function loadTimeline() {
-    $.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser }, function(response) {
-        var container = $('#timelineContainer');
-        $('#loadingSpinner').remove();
+    // Deklarasi currentUser PERTAMA sebelum dipakai di mana pun
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentUser = urlParams.get('id_users');
 
-        if (!response.data || response.data.length == 0) {
-            container.html(
-                '<div class="text-center py-5">' +
-                    '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
-                    '<p class="h5 text-muted">Belum ada laporan</p>' +
-                    '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
-                '</div>'
-            );
-            return;
-        }
-
-       
-
-        $.each(response.data, function(i, row) {
-            var status = row.status ? row.status : 'Menunggu';
-            var tahap  = 1;
-            if (status == 'Diproses') tahap = 2;
-            if (status == 'Selesai')  tahap = 3;
-
-            // Time label per laporan
-            container.append(
-                '<div class="time-label">' +
-                    '<span class="bg-primary">' + row.id_laporan + '</span>' +
-                '</div>'
-            );
-
-            // Tahap 1 - Menunggu (selalu ada)
-            container.append(
-                '<div>' +
-                    '<i class="fas fa-clock bg-secondary"></i>' +
-                    '<div class="timeline-item">' +
-                        '<h3 class="timeline-header">' +
-                            '<span class="badge badge-secondary">Menunggu</span> Laporan diterima' +
-                        '</h3>' +
-                        '<div class="timeline-body">' +
-                            '<i class="fas fa-map-marker-alt mr-1 text-muted"></i>' + row.lokasi_wisata + '<br>' +
-                            '<strong>Isi Laporan:</strong> ' + row.isi_laporan +
-                        '</div>' +
-                    '</div>' +
-                '</div>'
-            );
-
-            // Tahap 2 - Diproses
-            if (tahap >= 2) {
-                container.append(
-                    '<div>' +
-                        '<i class="fas fa-spinner bg-warning"></i>' +
-                        '<div class="timeline-item">' +
-                            '<h3 class="timeline-header">' +
-                                '<span class="badge badge-warning">Diproses</span> Laporan sedang diproses admin' +
-                            '</h3>' +
-                            (row.respons_admin && tahap == 2 ?
-                                '<div class="timeline-body">' +
-                                    '<div class="callout callout-warning">' +
-                                        '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
-                                        (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
-                                        '<p class="mb-0">' + row.respons_admin + '</p>' +
-                                    '</div>' +
-                                '</div>' : ''
-                            ) +
-                        '</div>' +
-                    '</div>'
-                );
-            } else {
-                container.append(
-                    '<div>' +
-                        '<i class="fas fa-spinner bg-gray"></i>' +
-                        '<div class="timeline-item">' +
-                            '<h3 class="timeline-header text-muted">' +
-                                '<span class="badge badge-secondary">Diproses</span> Menunggu diproses admin...' +
-                            '</h3>' +
-                        '</div>' +
-                    '</div>'
-                );
-            }
-
-            // Tahap 3 - Selesai
-            if (tahap >= 3) {
-                container.append(
-                    '<div>' +
-                        '<i class="fas fa-check bg-success"></i>' +
-                        '<div class="timeline-item">' +
-                            '<h3 class="timeline-header">' +
-                                '<span class="badge badge-success">Selesai</span> Laporan selesai ditangani' +
-                            '</h3>' +
-                            (row.respons_admin ?
-                                '<div class="timeline-body">' +
-                                    '<div class="callout callout-success">' +
-                                        '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
-                                        (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
-                                        '<p class="mb-0">' + row.respons_admin + '</p>' +
-                                    '</div>' +
-                                '</div>' : ''
-                            ) +
-                        '</div>' +
-                    '</div>'
-                );
-            } else {
-                container.append(
-                    '<div>' +
-                        '<i class="fas fa-check bg-gray"></i>' +
-                        '<div class="timeline-item">' +
-                            '<h3 class="timeline-header text-muted">' +
-                                '<span class="badge badge-secondary">Selesai</span> Belum selesai...' +
-                            '</h3>' +
-                        '</div>' +
-                    '</div>'
-                );
-            }
-        });
-
-        container.append('<div><i class="fas fa-clock bg-gray"></i></div>');
-
-    }, 'json').fail(function(){
-        $('#loadingSpinner').remove();
-        $('#timelineContainer').html(
-            '<div class="text-center py-5">' +
-                '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
-                '<p class="h5 text-muted">Belum ada laporan</p>' +
-                '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
-            '</div>'
-        );
-    });
-
-}
-
-    $(document).ready(function() {
-        loadTimeline();
-    });
-        // Ganti check_session dengan URL params (session tidak jalan di Vercel)
-    if (!new URLSearchParams(window.location.search).get('user')) {
+    // Redirect jika tidak ada parameter user
+    if (!urlParams.get('user')) {
         window.location.replace('/index.html');
     }
 
+    // Cegah tombol back browser
     history.pushState(null, null, window.location.href);
     window.addEventListener('popstate', function() {
         history.pushState(null, null, window.location.href);
         if (!new URLSearchParams(window.location.search).get('user')) {
-        window.location.replace('/index.html');
+            window.location.replace('/index.html');
         }
+    });
+
+    function loadTimeline() {
+        var container = $('#timelineContainer');
+
+        $.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser })
+            .done(function(response) {
+                $('#loadingSpinner').remove();
+
+                if (!response.data || response.data.length == 0) {
+                    container.html(
+                        '<div class="text-center py-5">' +
+                            '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
+                            '<p class="h5 text-muted">Belum ada laporan</p>' +
+                            '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
+                        '</div>'
+                    );
+                    return;
+                }
+
+                $.each(response.data, function(i, row) {
+                    var status = row.status ? row.status : 'Menunggu';
+                    var tahap  = 1;
+                    if (status == 'Diproses') tahap = 2;
+                    if (status == 'Selesai')  tahap = 3;
+
+                    // Time label per laporan
+                    container.append(
+                        '<div class="time-label">' +
+                            '<span class="bg-primary">' + row.id_laporan + '</span>' +
+                        '</div>'
+                    );
+
+                    // Tahap 1 - Menunggu (selalu ada)
+                    container.append(
+                        '<div>' +
+                            '<i class="fas fa-clock bg-secondary"></i>' +
+                            '<div class="timeline-item">' +
+                                '<h3 class="timeline-header">' +
+                                    '<span class="badge badge-secondary">Menunggu</span> Laporan diterima' +
+                                '</h3>' +
+                                '<div class="timeline-body">' +
+                                    '<i class="fas fa-map-marker-alt mr-1 text-muted"></i>' + row.lokasi_wisata + '<br>' +
+                                    '<strong>Isi Laporan:</strong> ' + row.isi_laporan +
+                                '</div>' +
+                            '</div>' +
+                        '</div>'
+                    );
+
+                    // Tahap 2 - Diproses
+                    if (tahap >= 2) {
+                        container.append(
+                            '<div>' +
+                                '<i class="fas fa-spinner bg-warning"></i>' +
+                                '<div class="timeline-item">' +
+                                    '<h3 class="timeline-header">' +
+                                        '<span class="badge badge-warning">Diproses</span> Laporan sedang diproses admin' +
+                                    '</h3>' +
+                                    (row.respons_admin && tahap == 2 ?
+                                        '<div class="timeline-body">' +
+                                            '<div class="callout callout-warning">' +
+                                                '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
+                                                (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
+                                                '<p class="mb-0">' + row.respons_admin + '</p>' +
+                                            '</div>' +
+                                        '</div>' : ''
+                                    ) +
+                                '</div>' +
+                            '</div>'
+                        );
+                    } else {
+                        container.append(
+                            '<div>' +
+                                '<i class="fas fa-spinner bg-gray"></i>' +
+                                '<div class="timeline-item">' +
+                                    '<h3 class="timeline-header text-muted">' +
+                                        '<span class="badge badge-secondary">Diproses</span> Menunggu diproses admin...' +
+                                    '</h3>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    }
+
+                    // Tahap 3 - Selesai
+                    if (tahap >= 3) {
+                        container.append(
+                            '<div>' +
+                                '<i class="fas fa-check bg-success"></i>' +
+                                '<div class="timeline-item">' +
+                                    '<h3 class="timeline-header">' +
+                                        '<span class="badge badge-success">Selesai</span> Laporan selesai ditangani' +
+                                    '</h3>' +
+                                    (row.respons_admin ?
+                                        '<div class="timeline-body">' +
+                                            '<div class="callout callout-success">' +
+                                                '<p class="mb-1"><strong><i class="fas fa-reply mr-1"></i> Respons Admin</strong>' +
+                                                (row.tgl_respons ? ' <small class="text-muted"><i class="fas fa-calendar-alt mr-1"></i>' + row.tgl_respons + '</small>' : '') + '</p>' +
+                                                '<p class="mb-0">' + row.respons_admin + '</p>' +
+                                            '</div>' +
+                                        '</div>' : ''
+                                    ) +
+                                '</div>' +
+                            '</div>'
+                        );
+                    } else {
+                        container.append(
+                            '<div>' +
+                                '<i class="fas fa-check bg-gray"></i>' +
+                                '<div class="timeline-item">' +
+                                    '<h3 class="timeline-header text-muted">' +
+                                        '<span class="badge badge-secondary">Selesai</span> Belum selesai...' +
+                                    '</h3>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    }
+                });
+
+                container.append('<div><i class="fas fa-clock bg-gray"></i></div>');
+            })
+            .fail(function(xhr) {
+                $('#loadingSpinner').remove();
+                container.html(
+                    '<div class="text-center py-5">' +
+                        '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
+                        '<p class="h5 text-muted">Belum ada laporan</p>' +
+                        '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
+                    '</div>'
+                );
+            });
+    }
+
+    $(document).ready(function() {
+        loadTimeline();
     });
 </script>
 
