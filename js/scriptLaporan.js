@@ -232,7 +232,6 @@ function loadProvinsi() {
   $('#kabkota').html('<option value="">-- Pilih Kabupaten/Kota --</option>').prop('disabled', true);
 
   $.ajax({
-    // ✅ FIX 2: tambah / di depan URL
     url: '/api.php?action=provinsi',
     method: 'GET',
     success: function (res) {
@@ -262,7 +261,6 @@ $(document).on('change', '#provinsi', function () {
   $('#kabkota').html('<option value="">Memuat kabupaten/kota...</option>').prop('disabled', true);
 
   $.ajax({
-    // ✅ FIX 3: tambah / di depan URL
     url: `/api.php?action=kabkota&kode=${kode_prov}`,
     method: 'GET',
     success: function (res) {
