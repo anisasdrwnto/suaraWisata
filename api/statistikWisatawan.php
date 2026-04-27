@@ -321,7 +321,7 @@ $base_url = "/";
   }
 
   $(document).ready(function () {
-    $.get('/api/api_wisman.php')
+    $.get('/api/api_wisatawan.php')
       .done(function (res) {
         if (res.status !== 'success') {
           tampilError(res.message || 'Data tidak valid.');
