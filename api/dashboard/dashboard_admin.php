@@ -33,43 +33,39 @@ if(empty($username)){
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
+
           <h1>Hello, <?= htmlspecialchars($username); ?></h1>
+
+        <div class="row">
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/images/Gambar 1.jpg" class="card-img-top gallery-img" alt="Gambar 1">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 1</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 1</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/images/Gambar 2.jpg" class="card-img-top gallery-img" alt="Gambar 2">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 2</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 2</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/images/Gambar 3.jpg" class="card-img-top gallery-img" alt="Gambar 3">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 3</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 3</p></div>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card">
               <img src="/images/Gambar 4.jpg" class="card-img-top gallery-img" alt="Gambar 4">
-              <div class="card-body">
-                <p class="card-text">Pariwisata 4</p>
-              </div>
+              <div class="card-body"><p class="card-text">Pariwisata 4</p></div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+</div>
+</section>
+</div>
+
   <!-- /.content-wrapper -->
 
   <!-- FOOTER -->
