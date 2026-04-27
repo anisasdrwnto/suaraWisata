@@ -71,7 +71,7 @@ $base_url = "/";
 <script>
     // Tambah di atas loadTimeline()
         const urlParams = new URLSearchParams(window.location.search);
-        const currentUser = urlParams.get('user');
+        const currentUser = urlParams.get('id_users');
    function loadTimeline() {
     $.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser }, function(response) {
         var container = $('#timelineContainer');
