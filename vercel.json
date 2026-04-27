@@ -19,6 +19,7 @@
 
         { "source": "/proses/(.*)", "destination": "/api/proses/$1"},
         { "source": "/api.php", "destination": "/api/api.php" },
+        { "source": "/api_wisatawan.php", "destination": "/api/api_wisatawan.php" },
         { "source": "/suaraWisata/proses/(.*)", "destination": "/api/proses/$1" },
         { "source": "/dashboard/:file.php", "destination": "/api/dashboard/:file.php" },
 
