@@ -2,6 +2,7 @@
 // Ambil dari $_GET karena session tidak jalan di Vercel
 $username = $_GET['user'] ?? 'Guest';
 $role     = strtoupper($_GET['role'] ?? '');
+$id_users - $_GET['id_users'] ?? '';
 $base_url = '/';
 ?>
 
@@ -43,7 +44,7 @@ $base_url = '/';
         <li class="nav-item menu-open">
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>dashboard/dashboard_user.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+              <a href="<?= $base_url ?>dashboard/dashboard_user.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
                 <p>Welcome page</p>
               </a>
             </li>
@@ -52,7 +53,7 @@ $base_url = '/';
           <?php if ($role !== 'ADMIN_MASTER' && $role !== 'ADMIN'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>laporKeluhan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+              <a href="<?= $base_url ?>laporKeluhan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
                 <p>Laporan Keluhan Wisata</p>
               </a>
             </li>
@@ -92,7 +93,7 @@ $base_url = '/';
           <?php if ($role === 'USR'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>statusLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+              <a href="<?= $base_url ?>statusLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
                 <p>Status Laporan</p>
               </a>
             </li>

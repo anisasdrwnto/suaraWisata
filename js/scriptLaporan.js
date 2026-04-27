@@ -1,6 +1,7 @@
 console.log("ini laporan js");
 const urlParams = new URLSearchParams(window.location.search);
-const currentUser = urlParams.get('user');
+// const currentUser = urlParams.get('user');
+const currentUser = urlParams.get('id_users');
 var laporan = {}
 
 $(document).ready(function(){
