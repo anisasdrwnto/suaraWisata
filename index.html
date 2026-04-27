@@ -111,6 +111,38 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  $(document).ready(function () {
+  $.ajax({
+    url: "/api/get_laporan.php",
+    method: "GET",
+    dataType: "json",
+    success: function (response) {
+      let html = "";
+
+      if (response.length > 0) {
+        response.forEach(function (item) {
+          html += `
+            <div class="card mb-3 shadow-sm">
+              <div class="card-body">
+                <h6 class="fw-bold mb-1">${item.nama_pelapor}</h6>
+                <p class="text-muted mb-0">${item.isi_laporan}</p>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        html = `<p class="text-muted">Belum ada laporan.</p>`;
+      }
+
+      $("#laporanOutput").html(html);
+    },
+    error: function () {
+      $("#laporanOutput").html(
+        `<p class="text-danger">Gagal mengambil data.</p>`
+      );
+    },
+  });
+});
 </script>
 
 
