@@ -1,12 +1,14 @@
 console.log("ini periksa laporan js");
+const UrlParams = new URLSearchParams(window.location.search);
+
+currentUser = urlParams.get('id_users');
 var periksaLaporan = {}
-const BASE_URL = '/suaraWisata/';
  
 $(document).ready(function(){
     $(document).on('click', '.btnRespons', function(){
         var id = $(this).data('id');
  
-        $.get(BASE_URL + 'proses/proses_periksaLaporan.php', { action: 'getById', id: id }, function(response){
+        $.get('/proses/proses_periksaLaporan.php', { action: 'getById', id: id }, function(response){
             console.log(response);
             var d = response.data;
             $('#id_laporan').val(d.id_laporan);
@@ -42,7 +44,7 @@ $(document).ready(function(){
             return;
         }
  
-        $.post(BASE_URL + 'proses/proses_periksaLaporan.php', json, function(response){
+        $.post('/proses/proses_periksaLaporan.php', json, function(response){
             console.log(response);
             if(response.status == 'success'){
                 $('#modalRespons').modal('hide');
@@ -69,7 +71,7 @@ $(document).ready(function(){
 });
  
 function loadData(){
-    $.get(BASE_URL + 'proses/proses_periksaLaporan.php', { action: 'read' }, function(response){
+    $.get('/proses/proses_periksaLaporan.php', { action: 'read' }, function(response){
         console.log(response);
         var tbody = $('#tbodyPeriksa');
         tbody.empty();

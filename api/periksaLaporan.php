@@ -1,20 +1,12 @@
 <?php
-session_start();
- 
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Pragma: no-cache");
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
- 
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+$username = $_GET['user'] ?? '';
+$role     = $_GET['role'] ?? '';
+
+if (empty($username)) {
+    header("Location: /index.html");
     exit;
 }
- 
-if ($_SESSION['ROLE'] !== 'ADMIN' && $_SESSION['ROLE'] !== 'ADMIN_MASTER') {
-    header("Location: index.php");
-    exit;
-}
- 
+
 $base_url = "/";
 ?>
 <!DOCTYPE html>
@@ -33,7 +25,7 @@ $base_url = "/";
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
  
-  <?php include "header/header.php"; ?>
+  <?php include __DIR__ . '/header/header.php'; ?>
  
   <!-- CONTENT WRAPPER -->
   <div class="content-wrapper">
@@ -75,7 +67,8 @@ $base_url = "/";
   </div>
   <!-- /.content-wrapper -->
  
-  <?php include "footer/footer.php"; ?>
+  <?php include __DIR__ . '/footer/footer.php'; ?>
+
   <aside class="control-sidebar control-sidebar-dark"></aside>
 </div>
  
@@ -165,26 +158,24 @@ $base_url = "/";
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="dist/js/adminlte.js"></script>
+<script src="<?= $base_url ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= $base_url ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="<?= $base_url ?>dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/scriptPeriksaLaporan.js"></script>
-<script src="js/logout.js"></script>
+<script src="<?= $base_url ?>js/scriptPeriksaLaporan.js"></script>
+<script src="<?= $base_url ?>js/logout.js"></script>
  
 <script>
+  if (!new URLSearchParams(window.location.search).get('user')) {
+    window.location.replace('/index.html');
+  }
+
   history.pushState(null, null, window.location.href);
-  window.addEventListener('pageshow', function(e) {
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => { if (!data.loggedIn) window.location.replace('index.php'); })
-      .catch(function() { window.location.replace('index.php'); });
-  });
   window.addEventListener('popstate', function() {
     history.pushState(null, null, window.location.href);
-    fetch('check_session.php', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => { if (!data.loggedIn) window.location.replace('index.php'); });
+    if (!new URLSearchParams(window.location.search).get('user')) {
+      window.location.replace('/index.html');
+    }
   });
 </script>
  
