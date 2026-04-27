@@ -27,54 +27,52 @@ $base_url = "/";
  
   <?php include __DIR__ . '/header/header.php'; ?>
  
-  <!-- CONTENT WRAPPER -->
   <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <h1><i class="fas fa-clipboard-list mr-2"></i> Periksa Laporan Wisata</h1>
+      </div>
+    </section>
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card card-outline card-primary">
-              <div class="card-header">
-                <h3 class="card-title">
-                  Periksa Laporan Wisata
-                </h3>
-              </div>
-              <div class="card-body p-0">
-                <table class="table table-bordered table-hover mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-center">No</th>
-                      <th>ID Laporan</th>
-                      <th>Nama Pelapor</th>
-                      <th>Nomer Telepon</th>
-                      <th>Email</th>
-                      <th>Lokasi Wisata</th>
-                      <th>Isi Laporan</th>
-                      <th>Status</th>
-                      <th>Respons Admin</th>
-                      <th>Tgl Respons</th>
-                      <th class="text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tbodyPeriksa"></tbody>
-                </table>
-              </div>
+        <div class="card card-outline card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Data Laporan Masuk</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-hover mb-0">
+                <thead class="thead-dark">
+                  <tr>
+                    <th class="text-center align-middle">No</th>
+                    <th class="align-middle">ID Laporan</th>
+                    <th class="align-middle">Nama Pelapor</th>
+                    <th class="align-middle">Nomer Telepon</th>
+                    <th class="align-middle">Email</th>
+                    <th class="align-middle">Lokasi Wisata</th>
+                    <th class="align-middle">Isi Laporan</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="align-middle">Respons Admin</th>
+                    <th class="align-middle">Tgl Respons</th>
+                    <th class="text-center align-middle">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyPeriksa"></tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-  <!-- /.content-wrapper -->
  
   <?php include __DIR__ . '/footer/footer.php'; ?>
-
   <aside class="control-sidebar control-sidebar-dark"></aside>
 </div>
  
 <!-- MODAL DETAIL & RESPONS -->
 <div class="modal fade" id="modalRespons" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-primary">
         <h5 class="modal-title text-white">
@@ -84,66 +82,72 @@ $base_url = "/";
       </div>
       <div class="modal-body">
         <input type="hidden" id="id_laporan">
- 
-        <!-- Detail Laporan (readonly) -->
-        <div class="card card-secondary card-outline mb-3">
-          <div class="card-header"><h6 class="mb-0"><i class="fas fa-info-circle mr-1"></i> Detail Laporan</h6></div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>ID Laporan</label>
-                  <input type="text" id="detail_id_laporan" class="form-control" readonly>
-                </div>
-                <div class="form-group">
-                  <label>Nama Pelapor</label>
-                  <input type="text" id="detail_nama_pelapor" class="form-control" readonly>
-                </div>
-                 <div class="form-group">
-                  <label>Nomer Telepon</label>
-                  <input type="text" id="detail_nomer_telp" class="form-control" readonly>
-                </div>
-                 <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" id="detail_email" class="form-control" readonly>
-                </div>
 
-              
+        <div class="row">
+          <!-- Kolom kiri: Detail Laporan -->
+          <div class="col-md-6">
+            <div class="card card-outline card-secondary">
+              <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-info-circle mr-1"></i> Detail Laporan</h6>
+              </div>
+              <div class="card-body">
                 <div class="form-group">
-                  <label>Lokasi Wisata</label>
-                  <input type="text" id="detail_lokasi_wisata" class="form-control" readonly>
+                  <label class="font-weight-bold">ID Laporan</label>
+                  <input type="text" id="detail_id_laporan" class="form-control form-control-sm" readonly>
                 </div>
                 <div class="form-group">
-                  <label>Isi Laporan</label>
-                  <textarea id="detail_isi_laporan" class="form-control" rows="3" readonly></textarea>
+                  <label class="font-weight-bold">Nama Pelapor</label>
+                  <input type="text" id="detail_nama_pelapor" class="form-control form-control-sm" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold">Nomer Telepon</label>
+                  <input type="text" id="detail_nomer_telp" class="form-control form-control-sm" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold">Email</label>
+                  <input type="text" id="detail_email" class="form-control form-control-sm" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold">Lokasi Wisata</label>
+                  <input type="text" id="detail_lokasi_wisata" class="form-control form-control-sm" readonly>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="font-weight-bold">Isi Laporan</label>
+                  <textarea id="detail_isi_laporan" class="form-control form-control-sm" rows="4" readonly></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom kanan: Respons Admin -->
+          <div class="col-md-6">
+            <div class="card card-outline card-primary">
+              <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-reply mr-1"></i> Respons Admin</h6>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="font-weight-bold">Status</label>
+                  <select id="status" class="form-control form-control-sm">
+                    <option value="Menunggu">Menunggu</option>
+                    <option value="Diproses">Diproses</option>
+                    <option value="Selesai">Selesai</option>
+                  </select>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="font-weight-bold">Respons Admin</label>
+                  <textarea id="respons_admin" class="form-control form-control-sm" rows="8" placeholder="Tulis respons untuk pelapor..."></textarea>
                 </div>
               </div>
             </div>
           </div>
         </div>
- 
-        <!-- Form Respons Admin -->
-        <div class="card card-primary card-outline">
-          <div class="card-header"><h6 class="mb-0"><i class="fas fa-reply mr-1"></i> Respons Admin</h6></div>
-          <div class="card-body">
-            <div class="form-group">
-              <label>Status</label>
-              <select id="status" class="form-control">
-                <option value="Menunggu">Menunggu</option>
-                <option value="Diproses">Diproses</option>
-                <option value="Selesai">Selesai</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Respons Admin</label>
-              <textarea id="respons_admin" class="form-control" rows="4" placeholder="Tulis respons untuk pelapor..."></textarea>
-            </div>
-          </div>
-        </div>
- 
+
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <i class="fas fa-times mr-1"></i> Tutup
+        </button>
         <button type="button" class="btn btn-primary" id="btnSimpanRespons">
           <i class="fas fa-save mr-1"></i> Simpan Respons
         </button>
@@ -181,4 +185,3 @@ $base_url = "/";
  
 </body>
 </html>
- 
