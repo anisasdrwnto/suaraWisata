@@ -13,7 +13,7 @@ $(document).ready(function(){
             cancelButtonText  : 'Batal'
         }).then(function(result) {
             if (result.isConfirmed) {
-                window.location.href = BASE_URL +  "proses/proses_logout.php";
+                window.location.href = "/index.html";
             }
         })
     });
