@@ -1,7 +1,7 @@
 console.log("ini periksa laporan js");
-const UrlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);
+const currentUser = urlParams.get('id_users');
 
-currentUser = urlParams.get('id_users');
 var periksaLaporan = {}
  
 $(document).ready(function(){
@@ -88,8 +88,6 @@ function loadData(){
         }
  
         $.each(response.data, function(i, row){
- 
-            // Badge warna berdasarkan status
             var badgeClass = 'badge-secondary';
             if(row.status == 'Diproses') badgeClass = 'badge-warning';
             if(row.status == 'Selesai')  badgeClass = 'badge-success';
