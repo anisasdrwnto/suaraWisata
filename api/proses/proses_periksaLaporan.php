@@ -1,5 +1,5 @@
 <?php
-require '../koneksi.php';
+require __DIR__ . '/../koneksi.php';
 header('Content-Type: application/json');
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
