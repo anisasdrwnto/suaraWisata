@@ -30,31 +30,31 @@ $base_url = "/";
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
-        <h1><i class="fas fa-clipboard-list mr-2"></i> Periksa Laporan Wisata</h1>
+        <h1>Periksa Laporan Wisata</h1>
       </div>
     </section>
     <section class="content">
       <div class="container-fluid">
         <div class="card card-outline card-primary">
           <div class="card-header">
-            <h3 class="card-title">Data Laporan Masuk</h3>
+            <h3 class="card-title"><i class="fas fa-list mr-2"></i> Data Laporan Masuk</h3>
           </div>
           <div class="card-body p-0">
             <div class="table-responsive">
-              <table class="table table-bordered table-striped table-hover mb-0">
-                <thead class="thead-dark">
+              <table class="table table-bordered table-hover mb-0">
+                <thead>
                   <tr>
-                    <th class="text-center align-middle">No</th>
-                    <th class="align-middle">ID Laporan</th>
-                    <th class="align-middle">Nama Pelapor</th>
-                    <th class="align-middle">Nomer Telepon</th>
-                    <th class="align-middle">Email</th>
-                    <th class="align-middle">Lokasi Wisata</th>
-                    <th class="align-middle">Isi Laporan</th>
-                    <th class="text-center align-middle">Status</th>
-                    <th class="align-middle">Respons Admin</th>
-                    <th class="align-middle">Tgl Respons</th>
-                    <th class="text-center align-middle">Action</th>
+                    <th class="text-center">No</th>
+                    <th>ID Laporan</th>
+                    <th>Nama Pelapor</th>
+                    <th>Nomer Telepon</th>
+                    <th>Email</th>
+                    <th>Lokasi Wisata</th>
+                    <th>Isi Laporan</th>
+                    <th>Status</th>
+                    <th>Respons Admin</th>
+                    <th>Tgl Respons</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody id="tbodyPeriksa"></tbody>
@@ -92,28 +92,28 @@ $base_url = "/";
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label class="font-weight-bold">ID Laporan</label>
-                  <input type="text" id="detail_id_laporan" class="form-control form-control-sm" readonly>
+                  <label>ID Laporan</label>
+                  <input type="text" id="detail_id_laporan" class="form-control" readonly>
                 </div>
                 <div class="form-group">
-                  <label class="font-weight-bold">Nama Pelapor</label>
-                  <input type="text" id="detail_nama_pelapor" class="form-control form-control-sm" readonly>
+                  <label>Nama Pelapor</label>
+                  <input type="text" id="detail_nama_pelapor" class="form-control" readonly>
                 </div>
                 <div class="form-group">
-                  <label class="font-weight-bold">Nomer Telepon</label>
-                  <input type="text" id="detail_nomer_telp" class="form-control form-control-sm" readonly>
+                  <label>Nomer Telepon</label>
+                  <input type="text" id="detail_nomer_telp" class="form-control" readonly>
                 </div>
                 <div class="form-group">
-                  <label class="font-weight-bold">Email</label>
-                  <input type="text" id="detail_email" class="form-control form-control-sm" readonly>
+                  <label>Email</label>
+                  <input type="text" id="detail_email" class="form-control" readonly>
                 </div>
                 <div class="form-group">
-                  <label class="font-weight-bold">Lokasi Wisata</label>
-                  <input type="text" id="detail_lokasi_wisata" class="form-control form-control-sm" readonly>
+                  <label>Lokasi Wisata</label>
+                  <input type="text" id="detail_lokasi_wisata" class="form-control" readonly>
                 </div>
                 <div class="form-group mb-0">
-                  <label class="font-weight-bold">Isi Laporan</label>
-                  <textarea id="detail_isi_laporan" class="form-control form-control-sm" rows="4" readonly></textarea>
+                  <label>Isi Laporan</label>
+                  <textarea id="detail_isi_laporan" class="form-control" rows="4" readonly></textarea>
                 </div>
               </div>
             </div>
@@ -127,16 +127,16 @@ $base_url = "/";
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label class="font-weight-bold">Status</label>
-                  <select id="status" class="form-control form-control-sm">
+                  <label>Status</label>
+                  <select id="status" class="form-control">
                     <option value="Menunggu">Menunggu</option>
                     <option value="Diproses">Diproses</option>
                     <option value="Selesai">Selesai</option>
                   </select>
                 </div>
                 <div class="form-group mb-0">
-                  <label class="font-weight-bold">Respons Admin</label>
-                  <textarea id="respons_admin" class="form-control form-control-sm" rows="8" placeholder="Tulis respons untuk pelapor..."></textarea>
+                  <label>Respons Admin</label>
+                  <textarea id="respons_admin" class="form-control" rows="8" placeholder="Tulis respons untuk pelapor..."></textarea>
                 </div>
               </div>
             </div>
@@ -145,9 +145,7 @@ $base_url = "/";
 
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          <i class="fas fa-times mr-1"></i> Tutup
-        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
         <button type="button" class="btn btn-primary" id="btnSimpanRespons">
           <i class="fas fa-save mr-1"></i> Simpan Respons
         </button>
