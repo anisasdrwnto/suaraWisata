@@ -44,7 +44,7 @@ $base_url = '/';
         <li class="nav-item menu-open">
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>dashboard/dashboard_user.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
+              <a href="<?= $base_url ?>/dashboard/dashboard_user.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
                 <p>Welcome page</p>
               </a>
             </li>
