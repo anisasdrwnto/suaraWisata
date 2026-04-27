@@ -98,6 +98,7 @@ $base_url = '/';
               </a>
             </li>
           </ul>
+          <?php endif; ?>
 
           <?php if ($role === 'USR'): ?>
           <ul class="nav nav-treeview">
