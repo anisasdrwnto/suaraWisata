@@ -83,7 +83,7 @@ $base_url = '/';
           <?php if ($role === 'ADMIN'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url ?>periksaLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>" class="nav-link">
+              <a href="<?= $base_url ?>periksaLaporan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
                 <p>Periksa Laporan</p>
               </a>
             </li>
