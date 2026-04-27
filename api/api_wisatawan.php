@@ -11,7 +11,7 @@ header('Cache-Control: no-cache, no-store, must-revalidate');
 /* =====================================
    KONFIGURASI BPS
 ===================================== */
-define('BPS_API_KEY', '317d3d127dfae5dcd6eae3998f5c4d3f');
+define('BPS_API_KEY', 'b6028c4ff88af791a4f0a24fa44457a5');
 define('BPS_BASE_URL', 'https://webapi.bps.go.id/v1/api/list');
 
 define('BPS_VAR',    '1470');
