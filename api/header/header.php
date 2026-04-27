@@ -90,6 +90,15 @@ $base_url = '/';
           </ul>
           <?php endif; ?>
 
+          <?php if($role === 'ADMIN'): ?>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= $base_url ?>statistikWisatawan.php?user=<?= urlencode($username) ?>&role=<?= urlencode($role) ?>&id_users=<?= urlencode($id_users) ?>" class="nav-link">
+                <p>Statistik Wisatawan</p>
+              </a>
+            </li>
+          </ul>
+
           <?php if ($role === 'USR'): ?>
           <ul class="nav nav-treeview">
             <li class="nav-item">
