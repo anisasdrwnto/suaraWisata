@@ -88,6 +88,8 @@ $base_url = "/";
             return;
         }
 
+       
+
         $.each(response.data, function(i, row) {
             var status = row.status ? row.status : 'Menunggu';
             var tahap  = 1;
@@ -188,7 +190,17 @@ $base_url = "/";
 
         container.append('<div><i class="fas fa-clock bg-gray"></i></div>');
 
-    }, 'json');
+    }, 'json').fail(function(){
+        $('#loadingSpinner').remove();
+        $('#timelineContainer').html(
+            '<div class="text-center py-5">' +
+                '<i class="fas fa-inbox fa-3x text-muted mb-3"></i>' +
+                '<p class="h5 text-muted">Belum ada laporan</p>' +
+                '<p class="text-muted">Anda belum pernah mengirimkan laporan wisata.</p>' +
+            '</div>'
+        );
+    });
+
 }
 
     $(document).ready(function() {
