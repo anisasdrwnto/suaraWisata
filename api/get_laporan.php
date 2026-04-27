@@ -3,25 +3,21 @@ header('Content-Type: application/json');
 
 require __DIR__ . '/koneksi.php';
 
-if (!$conn) {
-    die(json_encode(["error" => "Koneksi database gagal"]));
+try {
+    $stmt = $connection->prepare("
+        SELECT nama_pelapor, isi_laporan 
+        FROM laporan_wisata
+        ORDER BY id_laporan ASC
+    ");
+
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode($data);
+
+} catch (Exception $e) {
+    echo json_encode([
+        "error" => $e->getMessage()
+    ]);
 }
-
-$query = "SELECT nama_pelapor, isi_laporan 
-          FROM laporan_wisata
-          ORDER BY id_laporan ASC";
-
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die(json_encode(["error" => mysqli_error($conn)]));
-}
-
-$data = [];
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
-}
-
-echo json_encode($data);
 ?>
