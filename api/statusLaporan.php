@@ -69,6 +69,11 @@ $base_url = "/";
 <script src="js/logout.js"></script>
 
 <script>
+    // Test langsung apakah endpoint bisa diakses
+$.get('/proses/proses_statusLaporan.php', { action: 'read', id_users: currentUser })
+    .done(function(res) { console.log('SUCCESS:', res); })
+    .fail(function(xhr) { console.log('FAIL:', xhr.status, xhr.responseText); });
+    
     // Tambah di atas loadTimeline()
         const urlParams = new URLSearchParams(window.location.search);
         const currentUser = urlParams.get('id_users');
