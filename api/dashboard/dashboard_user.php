@@ -82,8 +82,6 @@ if(empty($username)){
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/logout.js"></script>
 <script>
-  // HAPUS cek check_session.php karena session tidak jalan di Vercel
-  // Cukup cek dari URL parameter
   const urlParams = new URLSearchParams(window.location.search);
   const user = urlParams.get('user');
   
