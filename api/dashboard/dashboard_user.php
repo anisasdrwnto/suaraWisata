@@ -23,9 +23,21 @@ if(empty($username)){
       object-fit: cover;
       width: 100%;
     }
+    /* Padding atas supaya konten tidak ketutupan navbar di HP */
+    .content-wrapper {
+      padding-top: 1rem;
+    }
+    /* Greeting lebih kecil di HP */
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
 
   <?php include __DIR__ . '/../header/header.php'; ?>
@@ -34,32 +46,32 @@ if(empty($username)){
     <section class="content">
       <div class="container-fluid">
 
-        <!-- Ganti $_SESSION ke $username dari $_GET -->
-        <h1>Hello, <?= htmlspecialchars($username); ?></h1>
+        <h1 class="mt-2 mb-3">Hello, <?= htmlspecialchars($username); ?></h1>
 
+        <!-- ✅ col-6 supaya di HP tampil 2 kolom, col-md-3 untuk desktop 4 kolom -->
         <div class="row">
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card">
+          <div class="col-6 col-md-3 mb-4">
+            <div class="card h-100">
               <img src="/images/Gambar 1.jpg" class="card-img-top gallery-img" alt="Gambar 1">
-              <div class="card-body"><p class="card-text">Pariwisata 1</p></div>
+              <div class="card-body p-2"><p class="card-text small">Pariwisata 1</p></div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card">
+          <div class="col-6 col-md-3 mb-4">
+            <div class="card h-100">
               <img src="/images/Gambar 2.jpg" class="card-img-top gallery-img" alt="Gambar 2">
-              <div class="card-body"><p class="card-text">Pariwisata 2</p></div>
+              <div class="card-body p-2"><p class="card-text small">Pariwisata 2</p></div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card">
+          <div class="col-6 col-md-3 mb-4">
+            <div class="card h-100">
               <img src="/images/Gambar 3.jpg" class="card-img-top gallery-img" alt="Gambar 3">
-              <div class="card-body"><p class="card-text">Pariwisata 3</p></div>
+              <div class="card-body p-2"><p class="card-text small">Pariwisata 3</p></div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card">
+          <div class="col-6 col-md-3 mb-4">
+            <div class="card h-100">
               <img src="/images/Gambar 4.jpg" class="card-img-top gallery-img" alt="Gambar 4">
-              <div class="card-body"><p class="card-text">Pariwisata 4</p></div>
+              <div class="card-body p-2"><p class="card-text small">Pariwisata 4</p></div>
             </div>
           </div>
         </div>
@@ -73,8 +85,9 @@ if(empty($username)){
 
 </div>
 
-<script src="/plugins/jquery/jquery.min.js"></script>
-<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script>$.widget.bridge('uibutton', $.ui.button)</script>
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
@@ -82,9 +95,9 @@ if(empty($username)){
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/logout.js"></script>
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const user = urlParams.get('user');
-  
+  var urlParams = new URLSearchParams(window.location.search);
+  var user = urlParams.get('user');
+
   if(!user){
     window.location.replace('/index.html');
   }
@@ -93,7 +106,7 @@ if(empty($username)){
 
   window.addEventListener('popstate', function() {
     history.pushState(null, null, window.location.href);
-    const u = new URLSearchParams(window.location.search).get('user');
+    var u = new URLSearchParams(window.location.search).get('user');
     if(!u) window.location.replace('/index.html');
   });
 </script>

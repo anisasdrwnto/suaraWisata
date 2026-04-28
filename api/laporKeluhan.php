@@ -19,11 +19,22 @@ $base_url = "/";
   <link rel="stylesheet" href="<?= $base_url ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="<?= $base_url ?>dist/css/adminlte.min.css">
   <link rel="stylesheet" href="<?= $base_url ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <style>
+    /* Supaya tabel bisa scroll horizontal di HP */
+    .card-body.p-0 {
+      overflow-x: auto;
+    }
+    /* Minimal lebar tabel supaya tidak terlalu mepet */
+    .table {
+      min-width: 700px;
+    }
+  </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
 
- <?php include __DIR__ . '/header/header.php'; ?>
+  <?php include __DIR__ . '/header/header.php'; ?>
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
@@ -40,24 +51,29 @@ $base_url = "/";
                   </button>
                 </div>
               </div>
+
+             
               <div class="card-body p-0">
-                <table class="table table-bordered table-hover mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-center">No</th>
-                      <th>ID Laporan</th>
-                      <th>Nama Pelapor</th>
-                      <th>Nomer Telepon</th>
-                      <th>Email</th>
-                      <th>Lokasi (Provinsi, Kab/Kota)</th>
-                      <th>Lokasi Wisata</th>
-                      <th>Isi Laporan</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tbodyLaporan"></tbody>
-                </table>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-center">No</th>
+                        <th>ID Laporan</th>
+                        <th>Nama Pelapor</th>
+                        <th>Nomer Telepon</th>
+                        <th>Email</th>
+                        <th>Lokasi (Provinsi, Kab/Kota)</th>
+                        <th>Lokasi Wisata</th>
+                        <th>Isi Laporan</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyLaporan"></tbody>
+                  </table>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -65,14 +81,14 @@ $base_url = "/";
     </section>
   </div>
 
-<?php include __DIR__ . '/footer/footer.php'; ?>
+  <?php include __DIR__ . '/footer/footer.php'; ?>
   <aside class="control-sidebar control-sidebar-dark"></aside>
 
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="modalAddLaporan" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-body">
         <h4>Form Laporan Keluhan Wisata</h4>
@@ -130,8 +146,9 @@ $base_url = "/";
   </div>
 </div>
 
-<script src="<?= $base_url ?>plugins/jquery/jquery.min.js"></script>
-<script src="<?= $base_url ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script>$.widget.bridge('uibutton', $.ui.button)</script>
 <script src="<?= $base_url ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= $base_url ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
