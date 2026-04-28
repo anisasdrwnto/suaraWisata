@@ -78,7 +78,7 @@ if(empty($username)){
 <!-- /.wrapper -->
 
 <!-- Scripts -->
-<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)

@@ -1,5 +1,5 @@
 console.log("ini periksa laporan js");
-const urlParams = new URLSearchParams(window.location.search);
+var   urlParams = new URLSearchParams(window.location.search);
 const currentUser = urlParams.get('id_users');
 
 var periksaLaporan = {}
