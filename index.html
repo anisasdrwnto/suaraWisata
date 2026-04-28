@@ -122,13 +122,13 @@
       if (response.length > 0) {
         response.forEach(function (item) {
           html += `
-            <div class="card mb-3 shadow-sm">
-              <div class="card-body">
-                <h6 class="fw-bold mb-1">${item.nama_pelapor}</h6>
-                <p class="text-muted mb-0">${item.isi_laporan}</p>
-                <p class="text-muted mb-0">${item.info_lokasi}</p>
-              </div>
+           <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+              <p class="mb-1"><strong>Nama Pelapor:</strong> ${item.nama_pelapor}</p>
+              <p class="mb-1"><strong>Lokasi Wisata:</strong> ${item.info_lokasi}</p>
+              <p class="mb-0"><strong>Isi Laporan:</strong> ${item.isi_laporan}</p>
             </div>
+          </div>
           `;
         });
       } else {
