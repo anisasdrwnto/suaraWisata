@@ -78,11 +78,14 @@ if(empty($username)){
 <!-- /.wrapper -->
 
 <!-- Scripts -->
+<!-- 1. jQuery dulu (WAJIB paling atas) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 2. jQuery UI -->
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<!-- 3. Plugin lainnya -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/dist/js/adminlte.js"></script>
@@ -90,8 +93,9 @@ if(empty($username)){
 <script src="/js/logout.js"></script>
 <script src="/js/scriptPeriksaLaporan.js"></script>
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const user = urlParams.get('user');
+  // Ganti const → var supaya tidak bentrok dengan scriptPeriksaLaporan.js
+  var urlParams = new URLSearchParams(window.location.search);
+  var user = urlParams.get('user');
   
   if(!user){
     window.location.replace('/index.html');
@@ -101,10 +105,9 @@ if(empty($username)){
 
   window.addEventListener('popstate', function() {
     history.pushState(null, null, window.location.href);
-    const u = new URLSearchParams(window.location.search).get('user');
+    var u = new URLSearchParams(window.location.search).get('user');
     if(!u) window.location.replace('/index.html');
   });
 </script>
-
 </body>
 </html>
