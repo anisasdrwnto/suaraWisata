@@ -5,7 +5,7 @@ require __DIR__ . '/koneksi.php';
 
 try {
     $stmt = $connection->prepare("
-        SELECT nama_pelapor, isi_laporan 
+        SELECT nama_pelapor, isi_laporan,info_lokasi
         FROM laporan_wisata
         ORDER BY id_laporan ASC
     ");
