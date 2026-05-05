@@ -59,7 +59,6 @@ $role     = $_SESSION['role'];
 
         <h1 class="mt-2 mb-3">Hello, <?= htmlspecialchars($username); ?></h1>
 
-        <!-- ✅ col-6 supaya di HP tampil 2 kolom, col-md-3 untuk desktop 4 kolom -->
         <div class="row">
           <div class="col-6 col-md-3 mb-4">
             <div class="card h-100">
