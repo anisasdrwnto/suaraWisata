@@ -1,9 +1,20 @@
 <?php
-$username = $_GET['user'] ?? '';
-if(empty($username)){
+session_start();
+
+if (!isset($_SESSION['id_users']) || !isset($_SESSION['role'])) {
     header("Location: /index.html");
     exit;
 }
+
+if ($_SESSION['role'] !== 'USER') {
+    header("Location: /index.html");
+    exit;
+}
+
+
+$username = $_SESSION['username'];
+$id_users = $_SESSION['id_users'];
+$role     = $_SESSION['role'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

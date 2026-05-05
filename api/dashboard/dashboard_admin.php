@@ -1,9 +1,20 @@
 <?php
-$username = $_GET['user'] ?? '';
-if(empty($username)){
+session_start();
+
+if (!isset($_SESSION['id_users']) || !isset($_SESSION['role'])) {
     header("Location: /index.html");
     exit;
 }
+
+if ($_SESSION['role'] !== 'ADMIN') {
+    header("Location: /index.html");
+    exit;
+}
+
+
+$username = $_SESSION['username'];
+$id_users = $_SESSION['id_users'];
+$role     = $_SESSION['role'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +39,14 @@ if(empty($username)){
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-   <?php include __DIR__ . '/../header/header.php'; ?>
-  <!-- CONTENT WRAPPER -->
+  <?php include __DIR__ . '/../header/header.php'; ?>
+
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
 
-          <h1>Hello, <?= htmlspecialchars($username); ?></h1>
+        <!-- ✅ Data dari session, bukan dari URL -->
+        <h1>Hello, <?= htmlspecialchars($username); ?></h1>
 
         <div class="row">
           <div class="col-md-3 col-sm-6 mb-4">
@@ -62,52 +74,26 @@ if(empty($username)){
             </div>
           </div>
         </div>
-</div>
-</section>
-</div>
 
-  <!-- /.content-wrapper -->
+      </div>
+    </section>
+  </div>
 
-  <!-- FOOTER -->
- <?php include __DIR__ . '/../footer/footer.php'; ?>
-
-  <!-- CONTROL SIDEBAR -->
+  <?php include __DIR__ . '/../footer/footer.php'; ?>
   <aside class="control-sidebar control-sidebar-dark"></aside>
-
 </div>
-<!-- /.wrapper -->
 
-<!-- Scripts -->
-<!-- 1. jQuery dulu (WAJIB paling atas) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- 2. jQuery UI -->
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- 3. Plugin lainnya -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/logout.js"></script>
 <script src="/js/scriptPeriksaLaporan.js"></script>
-<script>
-  // Ganti const → var supaya tidak bentrok dengan scriptPeriksaLaporan.js
-  var urlParams = new URLSearchParams(window.location.search);
-  var user = urlParams.get('user');
-  
-  if(!user){
-    window.location.replace('/index.html');
-  }
 
-  history.pushState(null, null, window.location.href);
-
-  window.addEventListener('popstate', function() {
-    history.pushState(null, null, window.location.href);
-    var u = new URLSearchParams(window.location.search).get('user');
-    if(!u) window.location.replace('/index.html');
-  });
-</script>
 </body>
 </html>
