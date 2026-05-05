@@ -1,4 +1,6 @@
 <?php
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', '1');
 session_start();
 // DEBUG — hapus setelah fix
 error_log("SESSION di dashboard_user: " . json_encode($_SESSION));

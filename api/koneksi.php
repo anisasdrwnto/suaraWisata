@@ -1,4 +1,10 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_path', '/');
+    ini_set('session.cookie_httponly', '1');
+    ini_set('session.cookie_samesite', 'Lax');
+    session_start();
+}
 $host   = 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
 $user   = '28bs2jCJxPBCHff.root';
 $pass   = 'xGUugfYqG11ci1bk';

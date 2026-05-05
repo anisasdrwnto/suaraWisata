@@ -1,6 +1,9 @@
 <?php
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', '1');
 session_start();
 header('Content-Type: application/json');
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
