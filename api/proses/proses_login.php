@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-require_once '../koneksi.php'; // ✅ path benar sesuai struktur folder
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/koneksi.php';
 
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
