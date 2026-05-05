@@ -2,52 +2,48 @@
 session_start();
 header('Content-Type: application/json');
 
-// Tolak request selain POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Method tidak diizinkan']);
     exit;
 }
 
-require_once '../api/koneksi.php'; // Sesuaikan path
+require_once '../koneksi.php'; // ✅ path benar sesuai struktur folder
 
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
 
-// Validasi input kosong
 if (empty($username) || empty($password)) {
-    echo json_encode(['status' => 'error', 'message' => 'Username dan password harus diisi']);
+    echo json_encode(['status' => 'error', 'message' => 'INPUT_EMPTY']);
     exit;
 }
 
-// Gunakan prepared statement, JANGAN string concat langsung
-$stmt = $conn->prepare("SELECT id, username, password, role FROM tb_users WHERE username = ? LIMIT 1");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
+try {
+    // Sesuaikan nama kolom & tabel dengan database kamu
+    $stmt = $connection->prepare("SELECT id_users, username, password, role FROM users WHERE username = ? LIMIT 1");
+    $stmt->execute([$username]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($result->num_rows === 1) {
-    $user = $result->fetch_assoc();
+    if ($row && password_verify($password, $row['password'])) {
 
-    // Verifikasi password hash (PASTIKAN saat register pakai password_hash())
-    if (password_verify($password, $user['password'])) {
-        // Regenerate session ID biar aman dari session fixation
         session_regenerate_id(true);
 
-        $_SESSION['id']       = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role']     = $user['role'];
+        $_SESSION['id_users'] = $row['id_users'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['role']     = $row['role'];
 
         echo json_encode([
             'status' => 'success',
-            'role'   => $user['role']
+            'role'   => $row['role']
         ]);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Username atau Password salah!']);
-    }
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Username atau Password salah!']);
-}
 
-$stmt->close();
-$conn->close();
+    } else {
+        // Pesan digabung biar attacker ga bisa tebak username valid/tidak
+        echo json_encode(['status' => 'error', 'message' => 'Username atau password salah']);
+    }
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'DB_ERROR']);
+}
 exit;
