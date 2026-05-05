@@ -6,7 +6,7 @@ if (!isset($_SESSION['id_users']) || !isset($_SESSION['role'])) {
     exit;
 }
 
-if ($_SESSION['role'] !== 'USER') {
+if ($_SESSION['role'] !== 'USR') {
     header("Location: /index.html");
     exit;
 }
@@ -105,7 +105,7 @@ $role     = $_SESSION['role'];
 <script src="/dist/js/adminlte.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/logout.js"></script>
-<script>
+<!-- <script>
   var urlParams = new URLSearchParams(window.location.search);
   var user = urlParams.get('user');
 
@@ -120,7 +120,7 @@ $role     = $_SESSION['role'];
     var u = new URLSearchParams(window.location.search).get('user');
     if(!u) window.location.replace('/index.html');
   });
-</script>
+</script> -->
 
 </body>
 </html>
