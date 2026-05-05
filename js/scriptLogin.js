@@ -43,25 +43,22 @@ $(document).ready(function(){
             success: function(data){
                 console.log("RESPONSE:", data);
 
-                if(data.status === 'success'){
-                    var role    = data.role;
-                    var uname   = encodeURIComponent(data.username);
-                    var idUsers = encodeURIComponent(data.id_users);
+            if (data.status === 'success') {
+                var role = data.role;
 
-                    Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000, showConfirmButton: false })
-                    .then(function(){
-                        if(role === 'ADMIN_MASTER'){
-                            window.location = '/api/dashboard/dashboard_master.php?user=' + uname + '&role=ADMIN_MASTER&id_users=' + idUsers;
-                        } else if(role === 'ADMIN'){
-                            window.location = '/api/dashboard/dashboard_admin.php?user=' + uname + '&role=ADMIN&id_users=' + idUsers;
-                        } else if(role === 'USR'){
-                            window.location = '/api/dashboard/dashboard_user.php?user=' + uname + '&role=USR&id_users=' + idUsers;
-                        }
-                    });
-
-                } else {
-                    Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
-                }
+                Swal.fire({ icon: 'success', text: 'Login berhasil!', timer: 2000, showConfirmButton: false })
+                .then(function () {
+                    if (role === 'ADMIN_MASTER') {
+                        window.location = '/api/dashboard/dashboard_master.php';
+                    } else if (role === 'ADMIN') {
+                        window.location = '/api/dashboard/dashboard_admin.php';
+                    } else if (role === 'USR') {
+                        window.location = '/api/dashboard/dashboard_user.php';
+                    }
+                });
+            }else{
+                Swal.fire({ icon: 'error', text: 'Username atau Password salah!' });
+            }
             },
             error: function(){
                 Swal.fire({ icon: 'error', text: 'Terjadi kesalahan pada server' });
