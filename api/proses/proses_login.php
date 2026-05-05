@@ -19,26 +19,22 @@ if (empty($username) || empty($password)) {
 }
 
 try {
-    // Sesuaikan nama kolom & tabel dengan database kamu
     $stmt = $connection->prepare("SELECT id_users, username, password, role FROM users WHERE username = ? LIMIT 1");
     $stmt->execute([$username]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row && password_verify($password, $row['password'])) {
-
         session_regenerate_id(true);
 
         $_SESSION['id_users'] = $row['id_users'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['role']     = $row['role'];
 
-        echo json_encode([
-            'status' => 'success',
-            'role'   => $row['role']
-        ]);
+        session_write_close(); // ← TAMBAH INI, paksa session tersimpan sebelum redirect
+
+        echo json_encode(['status' => 'success', 'role' => $row['role']]);
 
     } else {
-        // Pesan digabung biar attacker ga bisa tebak username valid/tidak
         echo json_encode(['status' => 'error', 'message' => 'Username atau password salah']);
     }
 

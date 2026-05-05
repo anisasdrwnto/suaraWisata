@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+// DEBUG — hapus setelah fix
+error_log("SESSION di dashboard_user: " . json_encode($_SESSION));
+var_dump($_SESSION); // lihat di browser sementara
+die();
 if (!isset($_SESSION['id_users']) || !isset($_SESSION['role'])) {
     header("Location: /index.html");
     exit;
